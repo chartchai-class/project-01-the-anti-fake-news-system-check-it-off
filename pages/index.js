@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Header from "../components/Header"; // นำเข้า Header
+import Header from "../components/Header";
 
 export default function Home() {
   const stats = [
@@ -58,22 +58,8 @@ export default function Home() {
 
   return (
     <div className="p-8">
-      {/* ใช้ Header */}
-      <Header />
-
-      {/* Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-        {stats.map((s, idx) => (
-          <div
-            key={idx}
-            className="bg-white shadow rounded-lg p-4 text-center border"
-          >
-            <div className="text-2xl">{s.icon}</div>
-            <div className="text-xl font-semibold">{s.value}</div>
-            <div className="text-gray-600">{s.label}</div>
-          </div>
-        ))}
-      </div>
+      
+      <Header stats={stats} />
 
       {/* Filter */}
       <div className="flex justify-between items-center mb-4">
