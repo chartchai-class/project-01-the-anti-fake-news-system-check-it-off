@@ -2,12 +2,6 @@ import { useState } from "react";
 import Header from "../components/Header";
 
 export default function Home() {
-  const stats = [
-    { label: "Total News", value: 6, icon: "" },
-    { label: "Verified", value: 3, icon: "" },
-    { label: "Fake News", value: 2, icon: "" },
-    { label: "Under Review", value: 1, icon: "" },
-  ];
 
   const newsData = [
     {
@@ -59,7 +53,7 @@ export default function Home() {
   return (
     <div className="p-8">
       
-      <Header stats={stats} />
+       <Header />
 
       {/* Filter */}
       <div className="flex justify-between items-center mb-4">
