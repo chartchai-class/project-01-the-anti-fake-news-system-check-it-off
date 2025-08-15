@@ -1,12 +1,12 @@
-// pages/index.js
 import { useState } from "react";
+import Header from "../components/Header"; // นำเข้า Header
 
 export default function Home() {
   const stats = [
-    { label: "Total News", value: 6, icon: "📈" },
-    { label: "Verified", value: 3, icon: "🛡️" },
-    { label: "Fake News", value: 2, icon: "🚫" },
-    { label: "Under Review", value: 1, icon: "🔍" },
+    { label: "Total News", value: 6, icon: "" },
+    { label: "Verified", value: 3, icon: "" },
+    { label: "Fake News", value: 2, icon: "" },
+    { label: "Under Review", value: 1, icon: "" },
   ];
 
   const newsData = [
@@ -58,14 +58,8 @@ export default function Home() {
 
   return (
     <div className="p-8">
-      {/* Header */}
-      <h1 className="text-3xl font-bold text-center text-blue-600">
-        Social Anti-Fake News System
-      </h1>
-      
-      <p className="text-center text-gray-600 mb-8">
-        Crowdsourced truth verification through community wisdom and collaborative fact-checking
-      </p>
+      {/* ใช้ Header */}
+      <Header />
 
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
