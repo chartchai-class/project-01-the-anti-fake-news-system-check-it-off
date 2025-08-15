@@ -1,115 +1,158 @@
-import Image from "next/image";
-import { Geist, Geist_Mono } from "next/font/google";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+// pages/index.js
+import { useState } from "react";
 
 export default function Home() {
+  const stats = [
+    { label: "Total News", value: 6, icon: "📈" },
+    { label: "Verified", value: 3, icon: "🛡️" },
+    { label: "Fake News", value: 2, icon: "🚫" },
+    { label: "Under Review", value: 1, icon: "🔍" },
+  ];
+
+  const newsData = [
+    {
+      id: 1,
+      title: "New Climate Technology Breakthrough Announced",
+      status: "Verified",
+      description:
+        "Scientists claim to have developed revolutionary carbon capture technology that could reverse climate change within a decade.",
+      author: "Dr. Sarah Chen",
+      date: "over 1 year ago",
+      upVotes: 46,
+      downVotes: 23,
+      comments: 3,
+    },
+    {
+      id: 2,
+      title: "Local Mayor Announces Free Public Transportation",
+      status: "Verified",
+      description:
+        "City mayor declares all public transportation will be free starting next month, funded by new tech company partnerships.",
+      author: "James Wilson",
+      date: "over 1 year ago",
+      upVotes: 89,
+      downVotes: 5,
+      comments: 2,
+    },
+    {
+      id: 3,
+      title: "Celebrity Spotted with Alien Technology",
+      status: "Fake News",
+      description:
+        "Famous actor photographed using device that allegedly allows communication with extraterrestrial beings.",
+      author: "Anonymous Source",
+      date: "over 1 year ago",
+      upVotes: 12,
+      downVotes: 156,
+      comments: 2,
+    },
+  ];
+
+  const [filter, setFilter] = useState("All News");
+  const [itemsPerPage, setItemsPerPage] = useState(6);
+
+  const filteredNews =
+    filter === "All News"
+      ? newsData
+      : newsData.filter((n) => n.status === filter);
+
   return (
-    <div
-      className={`${geistSans.className} ${geistMono.className} font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20`}
-    >
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              pages/index.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className="p-8">
+      {/* Header */}
+      <h1 className="text-3xl font-bold text-center text-blue-600">
+        Social Anti-Fake News System
+      </h1>
+      
+      <p className="text-center text-gray-600 mb-8">
+        Crowdsourced truth verification through community wisdom and collaborative fact-checking
+      </p>
+
+      {/* Stats */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+        {stats.map((s, idx) => (
+          <div
+            key={idx}
+            className="bg-white shadow rounded-lg p-4 text-center border"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            <div className="text-2xl">{s.icon}</div>
+            <div className="text-xl font-semibold">{s.value}</div>
+            <div className="text-gray-600">{s.label}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* Filter */}
+      <div className="flex justify-between items-center mb-4">
+        <div className="space-x-2">
+          {["All News", "Verified", "Fake News", "Under Review"].map((btn) => (
+            <button
+              key={btn}
+              onClick={() => setFilter(btn)}
+              className={`px-4 py-2 rounded ${
+                filter === btn
+                  ? "bg-blue-500 text-white"
+                  : "bg-gray-200 text-gray-700"
+              }`}
+            >
+              {btn}
+            </button>
+          ))}
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        <div>
+          <label className="mr-2 text-gray-700">Items per page:</label>
+          <select
+            className="border rounded px-2 py-1"
+            value={itemsPerPage}
+            onChange={(e) => setItemsPerPage(parseInt(e.target.value))}
+          >
+            {[6, 12, 24].map((n) => (
+              <option key={n} value={n}>
+                {n}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+
+      {/* News Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {filteredNews.map((news) => (
+          <div
+            key={news.id}
+            className="bg-white border rounded-lg shadow p-4 flex flex-col justify-between"
+          >
+            <div>
+              <h2 className="text-lg font-semibold mb-1">{news.title}</h2>
+              <span
+                className={`inline-block px-2 py-1 rounded text-sm mb-2 ${
+                  news.status === "Verified"
+                    ? "bg-green-100 text-green-700"
+                    : news.status === "Fake News"
+                    ? "bg-red-100 text-red-700"
+                    : "bg-yellow-100 text-yellow-700"
+                }`}
+              >
+                {news.status}
+              </span>
+              <p className="text-gray-700 text-sm mb-2">{news.description}</p>
+              <p className="text-sm text-gray-500 mb-2">
+                By {news.author} • {news.date}
+              </p>
+            </div>
+
+            <div className="flex justify-between items-center text-sm mt-4">
+              <div className="flex space-x-4">
+                <span className="text-green-600">👍 {news.upVotes}</span>
+                <span className="text-red-600">👎 {news.downVotes}</span>
+                <span className="text-gray-600">💬 {news.comments}</span>
+              </div>
+              <button className="border rounded px-3 py-1 hover:bg-gray-100">
+                View Details
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
