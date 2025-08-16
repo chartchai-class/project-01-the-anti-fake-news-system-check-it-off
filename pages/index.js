@@ -1,49 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "../components/Header";
 
 export default function Home() {
 
-  const newsData = [
-    {
-      id: 1,
-      title: "New Climate Technology Breakthrough Announced",
-      status: "Verified",
-      description:
-        "Scientists claim to have developed revolutionary carbon capture technology that could reverse climate change within a decade.",
-      author: "Dr. Sarah Chen",
-      date: "over 1 year ago",
-      upVotes: 46,
-      downVotes: 23,
-      comments: 3,
-    },
-    {
-      id: 2,
-      title: "Local Mayor Announces Free Public Transportation",
-      status: "Verified",
-      description:
-        "City mayor declares all public transportation will be free starting next month, funded by new tech company partnerships.",
-      author: "James Wilson",
-      date: "over 1 year ago",
-      upVotes: 89,
-      downVotes: 5,
-      comments: 2,
-    },
-    {
-      id: 3,
-      title: "Celebrity Spotted with Alien Technology",
-      status: "Fake News",
-      description:
-        "Famous actor photographed using device that allegedly allows communication with extraterrestrial beings.",
-      author: "Anonymous Source",
-      date: "over 1 year ago",
-      upVotes: 12,
-      downVotes: 156,
-      comments: 2,
-    },
-  ];
-
+  const[newsData, setNewsData] = useState([]);
   const [filter, setFilter] = useState("All News");
   const [itemsPerPage, setItemsPerPage] = useState(6);
+
+  useEffect(() => {
+    fetch("/db.json")
+      .then((response) => response.json())
+      .then((data) => setNewsData(data))
+      .catch((error) => console.error("Error fetching news data:", error));
+  }, []);
 
   const filteredNews =
     filter === "All News"
