@@ -15,7 +15,7 @@
     {
       "id": 2,
       "title": "Another Entry",
-      "stats": "Pending",
+      "stats": "Under Review",
       "description": "This entry is still under review.",
       "author": "Jane Smith",
       "image": "https://example.com/another-image.jpg",
@@ -27,7 +27,7 @@
     {
       "id": 3,
       "title": "Third Sample",
-      "stats": "Rejected",
+      "stats": "Fake News",
       "description": "This entry did not meet the criteria.",
       "author": "Alice Johnson",
       "image": "https://example.com/third-image.jpg",
@@ -51,7 +51,7 @@
     {
       "id": 5,
       "title": "Fifth Sample",
-      "stats": "Pending",
+      "stats": "Under Review",
       "description": "Awaiting review and approval.",
       "author": "Charlie Green",
       "image": "https://example.com/fifth-image.jpg",
@@ -75,7 +75,7 @@
     {
       "id": 7,
       "title": "Seventh Sample",
-      "stats": "Rejected",
+      "stats": "Fake News",
       "description": "This entry was rejected due to policy violations.",
       "author": "Ethan Black",
       "image": "https://example.com/seventh-image.jpg",
@@ -99,7 +99,7 @@
     {
         "id": 9,
         "title": "Ninth Sample",
-        "stats": "Pending",
+        "stats": "Under Review",
         "description": "Currently under review by the team.",
         "author": "George Yellow",
         "image": "https://example.com/ninth-image.jpg",
@@ -123,7 +123,7 @@
     {
       "id": 11,
       "title": "Eleventh Sample",
-      "stats": "Rejected",
+      "stats": "Fake News",
       "description": "This entry was rejected due to insufficient data.",
       "author": "Ian Orange",
       "image": "https://example.com/eleventh-image.jpg",
@@ -135,7 +135,7 @@
     {
       "id": 12,
       "title": "Twelfth Entry",
-      "stats": "Pending",
+      "stats": "Under Review",
       "description": "Awaiting final review and approval.",
       "author": "Julia Pink",
       "image": "https://example.com/twelfth-image.jpg",
@@ -159,7 +159,7 @@
     {
       "id": 14,
       "title": "Fourteenth Entry",
-      "stats": "Rejected",
+      "stats": "Fake News",
       "description": "This entry did not meet the submission guidelines.",
       "author": "Laura Silver",
       "image": "https://example.com/fourteenth-image.jpg",
@@ -183,7 +183,7 @@
     {
       "id": 16,
       "title": "Sixteenth Entry",
-      "stats": "Pending",
+      "stats": "Under Review",
       "description": "Currently under review by the editorial team.",
       "author": "Nina Bronze",
       "image": "https://example.com/sixteenth-image.jpg",
@@ -207,7 +207,7 @@
     {
       "id": 18,
       "title": "Eighteenth Entry",
-      "stats": "Rejected",
+      "stats": "Fake News",
       "description": "This entry was rejected due to policy violations.",
       "author": "Paula Steel",
       "image": "https://example.com/eighteenth-image.jpg",
@@ -219,7 +219,7 @@
     {
         "id": 19,
         "title": "Nineteenth Sample",
-        "stats": "Pending",
+        "stats": "Under Review",
         "description": "Awaiting final review and approval.",
         "author": "Quentin Zinc",
         "image": "https://example.com/nineteenth-image.jpg",
@@ -243,7 +243,7 @@
     {
         "id": 21,
         "title": "Twenty-First Sample",
-        "stats": "Rejected",
+        "stats": "Fake News",
         "description": "This entry did not meet the submission criteria.",
         "author": "Sam Wood",
         "image": "https://example.com/twenty-first-image.jpg",
@@ -255,7 +255,7 @@
     {
         "id": 22,
         "title": "Twenty-Second Entry",
-        "stats": "Pending",
+        "stats": "Under Review",
         "description": "Currently under review by the editorial team.",
         "author": "Tina Stone",
         "image": "https://example.com/twenty-second-image.jpg",
@@ -280,7 +280,7 @@
     {
         "id": 24,
         "title": "Twenty-Fourth Entry",
-        "stats": "Rejected",
+        "stats": "Fake News",
         "description": "This entry was rejected due to policy violations.",
         "author": "Victor Glass",
         "image": "https://example.com/twenty-fourth-image.jpg",
@@ -292,7 +292,7 @@
     {
         "id": 25,
         "title": "Twenty-Fifth Sample",
-        "stats": "Pending",
+        "stats": "Under Review",
         "description": "Awaiting final review and approval.",
         "author": "Wendy Plastic",
         "image": "https://example.com/twenty-fifth-image.jpg",
