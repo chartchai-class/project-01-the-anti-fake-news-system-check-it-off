@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import Header from "../components/Header";
 
 export default function Home() {
-
-  const[newsData, setNewsData] = useState([]);
+  const [newsData, setNewsData] = useState([]);
   const [filter, setFilter] = useState("All News");
   const [itemsPerPage, setItemsPerPage] = useState(6);
 
@@ -17,12 +16,11 @@ export default function Home() {
   const filteredNews =
     filter === "All News"
       ? newsData
-      : newsData.filter((n) => n.status === filter);
+      : newsData.filter((n) => n.stats === filter);
 
   return (
     <div className="p-8">
-      
-       <Header />
+      <Header />
 
       {/* Filter */}
       <div className="flex justify-between items-center mb-4">
@@ -31,20 +29,27 @@ export default function Home() {
             <button
               key={btn}
               onClick={() => setFilter(btn)}
-              className={`px-4 py-2 rounded ${
+              className={`px-4 py-2 rounded-lg font-bold text-md ${
                 filter === btn
                   ? "bg-blue-500 text-white"
-                  : "bg-gray-200 text-gray-700"
+                  : "bg-gray-50 text-gray-700"
               }`}
+              style={{ fontFamily: "Outfit, sans-serif" }}
             >
               {btn}
             </button>
           ))}
         </div>
         <div>
-          <label className="mr-2 text-gray-700">Items per page:</label>
+          <label
+            className="mr-2 text-gray-700 font-bold"
+            style={{ fontFamily: "Outfit, sans-serif" }}
+          >
+            Items per page :
+          </label>
           <select
-            className="border rounded px-2 py-1"
+            className="border rounded px-2 py-1 border-gray-300 text-gray-700 font-bold"
+            style={{ fontFamily: "Outfit, sans-serif" }}
             value={itemsPerPage}
             onChange={(e) => setItemsPerPage(parseInt(e.target.value))}
           >
@@ -59,7 +64,7 @@ export default function Home() {
 
       {/* News Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {filteredNews.map((news) => (
+        {filteredNews.slice(0, itemsPerPage).map((news) => (
           <div
             key={news.id}
             className="bg-white border rounded-lg shadow p-4 flex flex-col justify-between"
