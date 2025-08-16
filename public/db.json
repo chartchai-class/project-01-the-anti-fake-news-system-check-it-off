@@ -4,7 +4,7 @@
       "id": 1,
       "title": "Sample Data",
       "stats": "Verified",
-      "description": "This is a sample entry in the database.",
+      "description": "This is a sample entry in the database. This is a sample entry in the database.",
       "author": "John Doe",
       "image": "https://example.com/image.jpg",
       "date": "2023-10-01",
