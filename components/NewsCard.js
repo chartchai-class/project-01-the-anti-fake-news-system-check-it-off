@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function NewsCard({ news }) {
   return (
@@ -62,12 +63,14 @@ export default function NewsCard({ news }) {
             {news.comments}
           </span>
         </div>
+         <Link href={`/news/${news.id}`}>
         <button
           className=" mt-4 bg-gray-50 border-gray-200 border rounded px-3 py-1 hover:bg-blue-3c83f6 w-full h-10 mx-block
         hover:bg-[#3c83f6] hover:text-white transition-colors duration-300"
         >
           View Details
         </button>
+        </Link>
       </div>
     </div>
   );
