@@ -10,7 +10,7 @@ export default function Home() {
   useEffect(() => {
     fetch("/db.json")
       .then((response) => response.json())
-      .then((data) => setNewsData(data))
+      .then((data) => setNewsData(data.NewData))
       .catch((error) => console.error("Error fetching news data:", error));
   }, []);
 
@@ -75,7 +75,7 @@ export default function Home() {
                     : "bg-yellow-100 text-yellow-700"
                 }`}
               >
-                {news.status}
+                {news.stats}
               </span>
               <p className="text-gray-700 text-sm mb-2">{news.description}</p>
               <p className="text-sm text-gray-500 mb-2">
