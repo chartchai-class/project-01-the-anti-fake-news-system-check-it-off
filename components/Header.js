@@ -1,12 +1,29 @@
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 export default function Header() {
-  const stats = [
-  { label: "Total News", value: 3, icon: "/icon/Total-News.png", color: "text-blue-600" },
-  { label: "Verified", value: 3, icon: "/icon/Verified.png", color: "text-green-500" },
-  { label: "Fake News", value: 2, icon: "/icon/Fake-News.png", color: "text-red-500" },
-  { label: "Under Review", value: 1, icon: "/icon/Under-Review.png", color: "text-yellow-500" },
-  ];
+  const [stats, setStats] = useState([
+  { label: "Total News", value: 0, icon: "/icon/Total-News.png", color: "text-blue-600" },
+  { label: "Verified", value: 0, icon: "/icon/Verified.png", color: "text-green-500" },
+  { label: "Fake News", value: 0, icon: "/icon/Fake-News.png", color: "text-red-500" },
+  { label: "Under Review", value: 0, icon: "/icon/Under-Review.png", color: "text-yellow-500" },
+  ]);
+
+  useEffect(() => {
+    fetch("/db.json")
+      .then((response) => response.json())
+      .then((data) => { 
+        const news = data.NewData;
+
+         setStats([
+          { label: "Total News", value: news.length, icon: "/icon/Total-News.png", color: "text-blue-600" },
+          { label: "Verified", value: news.filter(n => n.stats === "Verified").length, icon: "/icon/Verified.png", color: "text-green-500" },
+          { label: "Fake News", value: news.filter(n => n.stats === "Fake News").length, icon: "/icon/Fake-News.png", color: "text-red-500" },
+          { label: "Under Review", value: news.filter(n => n.stats === "Under Review").length, icon: "/icon/Under-Review.png", color: "text-yellow-500" },
+        ]);
+      })
+      .catch((err) => console.error(err));
+  }, []);
 
   return (
     <header className="text-center mb-8 p-6 rounded-lg shadow-md bg-gradient-to-r from-blue-200 via-blue-100 to-green-100">
@@ -30,7 +47,7 @@ export default function Header() {
           {stats.map((s, idx) => (
             <div
               key={idx}
-              className="bg-white shadow rounded-lg border border-gray-100 w-48 h-48 flex flex-col items-center justify-center p-4 text-center"
+              className="bg-white shadow rounded-lg border border-gray-100 w-54 h-34 flex flex-col items-center justify-center p-4 text-center"
               style={{ color: "#7e7e7eff", fontFamily: "Outfit, sans-serif" }}
             >
               <div className="mb-2">

@@ -30,7 +30,7 @@ export default function Home() {
             <button
               key={btn}
               onClick={() => setFilter(btn)}
-              className={`px-4 py-2 rounded-lg font-bold text-md ${
+              className={`px-4 py-2 rounded-lg text-md ${
                 filter === btn
                   ? "bg-blue-500 text-white"
                   : "bg-gray-50 text-gray-700"
