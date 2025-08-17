@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 
 export default function NewsDetail() {
   const router = useRouter();
@@ -9,16 +8,44 @@ export default function NewsDetail() {
   const [news, setNews] = useState(null);
   const commentsCount = 12;
 
+  const handleVote = async (type) => {
+  try {
+    const rowIndex = parseInt(id); 
+    await fetch("/api/news", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ rowIndex, type }),
+    });
+
+    // update state ทันที
+    setNews((prev) => ({
+      ...prev,
+      upVotes: type === "up" ? prev.upVotes + 1 : prev.upVotes,
+      downVotes: type === "down" ? prev.downVotes + 1 : prev.downVotes,
+    }));
+  } catch (err) {
+    console.error("Vote failed", err);
+  }
+};
+
+
   useEffect(() => {
-    if (!id) return;
-    fetch("/db.json")
-      .then((res) => res.json())
-      .then((data) => {
-        const item = data.NewData.find((n) => n.id === parseInt(id));
-        setNews(item);
-      })
-      .catch((err) => console.error(err));
-  }, [id]);
+  if (!id) return;
+
+  async function fetchNews() {
+    try {
+      const res = await fetch(`/api/news?startRow=0&endRow=25`); // ดึง row 0–100
+      const data = await res.json();
+      const item = data.find((n) => n.id === id || n.id === parseInt(id));
+      setNews(item);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  fetchNews();
+}, [id]);
+
 
   if (!news) return <p className="p-8">Loading...</p>;
 

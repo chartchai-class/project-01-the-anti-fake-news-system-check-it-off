@@ -1,11 +1,34 @@
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function NewsCard({ news }) {
+export default function NewsCard({ news: propNews, id }) {
+  const [news, setNews] = useState(propNews || null);
+
+  useEffect(() => {
+    
+    if (propNews || !id) return;
+
+    async function fetchNews() {
+      try {
+        const res = await fetch(`/api/news?startRow=0&endRow=25`);
+        const data = await res.json();
+        const item = data.find((n) => n.id === id || n.id === parseInt(id));
+        setNews(item);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    fetchNews();
+  }, [propNews, id]);
+
+  if (!news) return <p>Loading...</p>;
+
   return (
     <div
       className="bg-white border rounded-lg shadow p-4 flex flex-col justify-between border-gray-200 
-     hover:shadow-lg hover:-translate-y-1 transform transform transition duration-300 group"
+     hover:shadow-lg hover:-translate-y-1 transform transition duration-300 group"
       style={{ fontFamily: "Outfit, sans-serif" }}
     >
       <div>
@@ -63,13 +86,13 @@ export default function NewsCard({ news }) {
             {news.comments}
           </span>
         </div>
-         <Link href={`/news/${news.id}`}>
-        <button
-          className=" mt-4 bg-gray-50 border-gray-200 border rounded px-3 py-1 hover:bg-blue-3c83f6 w-full h-10 mx-block
-        hover:bg-[#3c83f6] hover:text-white transition-colors duration-300"
-        >
-          View Details
-        </button>
+        <Link href={`/news/${news.id}`}>
+          <button
+            className=" mt-4 bg-gray-50 border-gray-200 border rounded px-3 py-1 w-full h-10 
+            hover:bg-[#3c83f6] hover:text-white transition-colors duration-300"
+          >
+            View Details
+          </button>
         </Link>
       </div>
     </div>
