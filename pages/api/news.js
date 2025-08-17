@@ -2,7 +2,10 @@ import { google } from "googleapis";
 import path from "path";
 
 const auth = new google.auth.GoogleAuth({
-  keyFile: path.join(process.cwd(), "secret/newsdatabaseproject-168367164553.json"),
+  keyFile: path.join(
+    process.cwd(),
+    "secret/newsdatabaseproject-168367164553.json"
+  ),
   scopes: ["https://www.googleapis.com/auth/spreadsheets"],
 });
 
@@ -10,7 +13,7 @@ const spreadsheetId = "1xXd_djAF1jp7c5jrY-mzAwVYxSN9wbl_0RTpKKvH0AA";
 const sheetName = "Sheet1";
 
 export default async function handler(req, res) {
-   res.setHeader("Cache-Control", "no-store");
+  res.setHeader("Cache-Control", "no-store");
   const client = await auth.getClient();
   const sheets = google.sheets({ version: "v4", auth: client });
 
@@ -18,25 +21,25 @@ export default async function handler(req, res) {
   if (req.method === "GET") {
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId,
-      range: `${sheetName}!A:I`,
+      range: `${sheetName}!A:K`, // A–K ครอบคลุม fullDescription
     });
 
     const rows = response.data.values || [];
     if (!rows.length) return res.status(200).json([]);
 
     const data = rows.slice(1).map((row) => ({
-  id: row[0] || "",
-  title: row[1] || "",
-  stats: row[2] || "",
-  description: row[3] || "",
-  author: row[4] || "",
-  image: row[5] ? `/news/images/${row[5]}` : "", // add leading slash and folder
-  date: row[6] || "",
-  upVotes: parseInt(row[7] || 0),
-  downVotes: parseInt(row[8] || 0),
-  comments: parseInt(row[9] || 0),
-}));
-
+      id: row[0] || "",
+      title: row[1] || "",
+      stats: row[2] || "",
+      description: row[3] || "",
+      fullDescription: row[10] || "",
+      author: row[4] || "",
+      image: row[5] ? `/news/images/${row[5]}` : "",
+      date: row[6] || "",
+      upVotes: parseInt(row[7] || 0),
+      downVotes: parseInt(row[8] || 0),
+      comments: parseInt(row[9] || 0),
+    }));
 
     return res.status(200).json(data);
   }
@@ -48,6 +51,7 @@ export default async function handler(req, res) {
       title,
       stats,
       description,
+      fullDescription,
       author,
       image,
       date,
@@ -58,10 +62,24 @@ export default async function handler(req, res) {
 
     await sheets.spreadsheets.values.append({
       spreadsheetId,
-      range: `${sheetName}!A:I`,
+      range: `${sheetName}!A:K`,
       valueInputOption: "RAW",
       resource: {
-        values: [[id, title, stats, description, author, image, date, upVotes, downVotes, comments]],
+        values: [
+          [
+            id,
+            title,
+            stats,
+            description,
+            fullDescription,
+            author,
+            image,
+            date,
+            upVotes,
+            downVotes,
+            comments,
+          ],
+        ],
       },
     });
 
@@ -74,7 +92,7 @@ export default async function handler(req, res) {
 
     const rowResponse = await sheets.spreadsheets.values.get({
       spreadsheetId,
-      range: `${sheetName}!A:J`,
+      range: `${sheetName}!A:K`,
     });
 
     const row = rowResponse.data.values[rowIndex];

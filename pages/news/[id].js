@@ -6,7 +6,6 @@ export default function NewsDetail() {
   const router = useRouter();
   const { id } = router.query;
   const [news, setNews] = useState(null);
-  const commentsCount = 12;
 
   const handleVote = async (type) => {
     try {
@@ -96,17 +95,16 @@ export default function NewsDetail() {
 
         {/* News Image */}
         {news.image && (
-  <div className="w-full h-64 relative mb-4">
-    <Image
-      src={news.image} // "/news/images/1.jpg"
-      alt={news.title}
-      fill
-      style={{ objectFit: "cover" }}
-      className="rounded-lg"
-    />
-  </div>
-)}
-
+          <div className="w-full h-64 relative mb-4">
+            <Image
+              src={news.image} // "/news/images/1.jpg"
+              alt={news.title}
+              fill
+              style={{ objectFit: "cover" }}
+              className="rounded-lg"
+            />
+          </div>
+        )}
 
         {/* Votes and Comments */}
         <div className="flex flex-wrap items-center gap-4 mt-2">
@@ -141,8 +139,10 @@ export default function NewsDetail() {
           </button>
         </div>
 
-        {/* News Description */}
-        <div className="mt-4 text-gray-700">{news.description}</div>
+        {/* Description */}
+        <div className="mt-4 text-gray-700 whitespace-pre-line">
+          {news.fullDescription || news.description}
+        </div>
 
         <div className="h-px bg-gray-300 w-full"></div>
 
@@ -153,7 +153,7 @@ export default function NewsDetail() {
           </button>
 
           <button className="w-full px-4 py-2 bg-gray-200 rounded hover:bg-gray-300">
-            View More Comments ({commentsCount})
+            View More Comments ({news.comments})
           </button>
         </div>
       </div>
