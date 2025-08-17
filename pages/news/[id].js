@@ -9,43 +9,40 @@ export default function NewsDetail() {
   const commentsCount = 12;
 
   const handleVote = async (type) => {
-  try {
-    const rowIndex = parseInt(id); 
-    await fetch("/api/news", {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ rowIndex, type }),
-    });
+    try {
+      const rowIndex = parseInt(id);
+      await fetch("/api/news", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ rowIndex, type }),
+      });
 
-    // update state ทันที
-    setNews((prev) => ({
-      ...prev,
-      upVotes: type === "up" ? prev.upVotes + 1 : prev.upVotes,
-      downVotes: type === "down" ? prev.downVotes + 1 : prev.downVotes,
-    }));
-  } catch (err) {
-    console.error("Vote failed", err);
-  }
-};
-
+      setNews((prev) => ({
+        ...prev,
+        upVotes: type === "up" ? prev.upVotes + 1 : prev.upVotes,
+        downVotes: type === "down" ? prev.downVotes + 1 : prev.downVotes,
+      }));
+    } catch (err) {
+      console.error("Vote failed", err);
+    }
+  };
 
   useEffect(() => {
-  if (!id) return;
+    if (!id) return;
 
-  async function fetchNews() {
-    try {
-      const res = await fetch(`/api/news?startRow=0&endRow=25`); // ดึง row 0–100
-      const data = await res.json();
-      const item = data.find((n) => n.id === id || n.id === parseInt(id));
-      setNews(item);
-    } catch (err) {
-      console.error(err);
+    async function fetchNews() {
+      try {
+        const res = await fetch(`/api/news?startRow=0&endRow=25`); // ดึง row 0–100
+        const data = await res.json();
+        const item = data.find((n) => n.id === id || n.id === parseInt(id));
+        setNews(item);
+      } catch (err) {
+        console.error(err);
+      }
     }
-  }
 
-  fetchNews();
-}, [id]);
-
+    fetchNews();
+  }, [id]);
 
   if (!news) return <p className="p-8">Loading...</p>;
 
@@ -56,7 +53,7 @@ export default function NewsDetail() {
     >
       <button
         onClick={() => router.back()}
-        className="mb-6 flex items-center px-3 py-1 bg-gray-100 hover:bg-blue-500 rounded shadow hover:text-white"
+        className="mb-6 flex items-center px-3 py-1 bg-gray-100 hover:bg-gray-300 rounded shadow "
       >
         <Image
           src="/icon/Card/Back.png"
@@ -98,10 +95,10 @@ export default function NewsDetail() {
         </div>
 
         {/* News Image */}
-{news.image && (
+        {news.image && (
   <div className="w-full h-64 relative mb-4">
     <Image
-      src={news.image}
+      src={news.image} // "/news/images/1.jpg"
       alt={news.title}
       fill
       style={{ objectFit: "cover" }}
@@ -109,8 +106,6 @@ export default function NewsDetail() {
     />
   </div>
 )}
-
-<h1 className="text-3xl font-bold">{news.title}</h1>
 
 
         {/* Votes and Comments */}

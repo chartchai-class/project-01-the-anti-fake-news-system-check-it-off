@@ -6,7 +6,6 @@ export default function NewsCard({ news: propNews, id }) {
   const [news, setNews] = useState(propNews || null);
 
   useEffect(() => {
-    
     if (propNews || !id) return;
 
     async function fetchNews() {
@@ -37,7 +36,7 @@ export default function NewsCard({ news: propNews, id }) {
             {news.title}{" "}
           </h2>
           <span
-            className={`inline-block px-2 py-1 rounded text-md mb-2 ${
+            className={`inline-block px-2 py-1 rounded text-md mb-2 whitespace-nowrap ${
               news.stats === "Verified"
                 ? "bg-green-100 text-green-700"
                 : news.stats === "Fake News"
