@@ -10,20 +10,39 @@ export default function Header() {
   ]);
 
   useEffect(() => {
-    fetch("/db.json")
-      .then((response) => response.json())
-      .then((data) => { 
-        const news = data.NewData;
+  fetch("/api/news?startRow=0&endRow=25") // fetch from your Google Sheets API
+    .then((response) => response.json())
+    .then((news) => { 
+      setStats([
+        { 
+          label: "Total News", 
+          value: news.length, 
+          icon: "/icon/Total-News.png", 
+          color: "text-blue-600" 
+        },
+        { 
+          label: "Verified", 
+          value: news.filter(n => n.stats === "Verified").length, 
+          icon: "/icon/Verified.png", 
+          color: "text-green-500" 
+        },
+        { 
+          label: "Fake News", 
+          value: news.filter(n => n.stats === "Fake News").length, 
+          icon: "/icon/Fake-News.png", 
+          color: "text-red-500" 
+        },
+        { 
+          label: "Under Review", 
+          value: news.filter(n => n.stats === "Under Review").length, 
+          icon: "/icon/Under-Review.png", 
+          color: "text-yellow-500" 
+        },
+      ]);
+    })
+    .catch((err) => console.error(err));
+}, []);
 
-         setStats([
-          { label: "Total News", value: news.length, icon: "/icon/Total-News.png", color: "text-blue-600" },
-          { label: "Verified", value: news.filter(n => n.stats === "Verified").length, icon: "/icon/Verified.png", color: "text-green-500" },
-          { label: "Fake News", value: news.filter(n => n.stats === "Fake News").length, icon: "/icon/Fake-News.png", color: "text-red-500" },
-          { label: "Under Review", value: news.filter(n => n.stats === "Under Review").length, icon: "/icon/Under-Review.png", color: "text-yellow-500" },
-        ]);
-      })
-      .catch((err) => console.error(err));
-  }, []);
 
   return (
     <header className="text-center mb-8 p-6 rounded-lg shadow-md bg-gradient-to-r from-blue-200 via-blue-100 to-green-100">
