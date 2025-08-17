@@ -97,6 +97,22 @@ export default function NewsDetail() {
           <span className="text-gray-600">{news.date}</span>
         </div>
 
+        {/* News Image */}
+{news.image && (
+  <div className="w-full h-64 relative mb-4">
+    <Image
+      src={news.image}
+      alt={news.title}
+      fill
+      style={{ objectFit: "cover" }}
+      className="rounded-lg"
+    />
+  </div>
+)}
+
+<h1 className="text-3xl font-bold">{news.title}</h1>
+
+
         {/* Votes and Comments */}
         <div className="flex flex-wrap items-center gap-4 mt-2">
           <button className="flex items-center gap-1 px-3 py-1 bg-green-50 hover:bg-green-100 rounded">
