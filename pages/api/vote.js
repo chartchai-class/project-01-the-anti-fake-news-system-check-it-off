@@ -1,14 +1,17 @@
-// It is API route collecting data from Google Sheets Vote Database
 import { google } from "googleapis";
 import path from "path";
 
 const auth = new google.auth.GoogleAuth({
-  keyFile: path.join(process.cwd(), "secret/newsdatabaseproject-168367164553.json"),
+  keyFile: path.join(
+    process.cwd(),
+    "secret/newsdatabaseproject-168367164553.json"
+  ),
   scopes: ["https://www.googleapis.com/auth/spreadsheets"],
 });
 
 const spreadsheetId = "1xXd_djAF1jp7c5jrY-mzAwVYxSN9wbl_0RTpKKvH0AA";
-const sheetName = "Sheet1";
+const sheetNews = "Sheet1";
+const sheetComments = "Sheet2";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -16,54 +19,85 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { id, type } = req.body;
-    const sheets = google.sheets({ version: "v4", auth: await auth.getClient() });
-
-    const readRes = await sheets.spreadsheets.values.get({
-      spreadsheetId,
-      range: `${sheetName}!A:I`,
+    const { id, type, name, comment, imageUrl } = req.body;
+    const sheets = google.sheets({
+      version: "v4",
+      auth: await auth.getClient(),
     });
 
-    const rows = readRes.data.values || [];
-    const rowIndex = rows.findIndex((r) => r[0] === id.toString());
+    // 1️⃣ อัปเดต vote ใน Sheet1
+    const readNews = await sheets.spreadsheets.values.get({
+      spreadsheetId,
+      range: `${sheetNews}!A:I`,
+    });
 
-    if (rowIndex === -1) {
+    const newsRows = readNews.data.values || [];
+    const rowIndex = newsRows.findIndex((r) => r[0] === id.toString());
+    if (rowIndex === -1)
       return res.status(404).json({ error: "News not found" });
-    }
 
-    let upVotes = parseInt(rows[rowIndex][7] || "0", 10);
-    let downVotes = parseInt(rows[rowIndex][8] || "0", 10);
-
+    let upVotes = parseInt(newsRows[rowIndex][7] || "0", 10);
+    let downVotes = parseInt(newsRows[rowIndex][8] || "0", 10);
     if (type === "up") upVotes++;
     if (type === "down") downVotes++;
 
-   // อัปเดต Column H/I เสร็จแล้ว
-await sheets.spreadsheets.values.update({
-  spreadsheetId,
-  range: `${sheetName}!H${rowIndex + 1}:I${rowIndex + 1}`,
-  valueInputOption: "RAW",
-  resource: { values: [[upVotes, downVotes]] },
-});
+    await sheets.spreadsheets.values.update({
+      spreadsheetId,
+      range: `${sheetNews}!H${rowIndex + 1}:I${rowIndex + 1}`,
+      valueInputOption: "RAW",
+      resource: { values: [[upVotes, downVotes]] },
+    });
 
+    let updatedStatus = "Under Review";
+    if (upVotes > downVotes) updatedStatus = "Verified";
+    else if (downVotes > upVotes) updatedStatus = "Fake News";
 
-let updatedStats = "Under Review";
-if (upVotes > downVotes) updatedStats = "Verified";
-else if (downVotes > upVotes) updatedStats = "Fake News";
+    await sheets.spreadsheets.values.update({
+      spreadsheetId,
+      range: `${sheetNews}!C${rowIndex + 1}`,
+      valueInputOption: "USER_ENTERED",
+      resource: { values: [[updatedStatus]] },
+    });
 
-await sheets.spreadsheets.values.update({
-  spreadsheetId,
-  range: `${sheetName}!C${rowIndex + 1}`,
-  valueInputOption: "USER_ENTERED",
-  resource: { values: [[updatedStats]] },
-});
+    // 2️⃣ Append comment ลง Sheet2 (ไม่เก็บ updatedStatus)
+    const readComments = await sheets.spreadsheets.values.get({
+      spreadsheetId,
+      range: `${sheetComments}!A:G`,
+    });
 
-// ส่งกลับไป client
-res.status(200).json({ success: true, upVotes, downVotes, stats: updatedStats });
+    const commentRows = readComments.data.values || [];
+    const nextCommentId =
+      commentRows.length > 0
+        ? parseInt(commentRows[commentRows.length - 1][0], 10) + 1
+        : 1;
+    const createdAt = new Date().toISOString();
 
+    const newComment = [
+      nextCommentId,
+      id,
+      name,
+      type,
+      comment || "",
+      createdAt,
+    ];
 
-    res.status(200).json({ success: true, upVotes, downVotes });
+    await sheets.spreadsheets.values.append({
+      spreadsheetId,
+      range: `${sheetComments}!A:G`,
+      valueInputOption: "USER_ENTERED",
+      resource: { values: [newComment] },
+    });
+
+    // ส่งกลับ frontend
+    res.status(200).json({
+      success: true,
+      upVotes,
+      downVotes,
+      stats: updatedStatus,
+      comment: newComment,
+    });
   } catch (err) {
-    console.error("Vote error:", err);
-    res.status(500).json({ error: "Failed to update vote" });
+    console.error("Vote & Comment error:", err);
+    res.status(500).json({ error: "Failed to submit vote & comment" });
   }
 }
