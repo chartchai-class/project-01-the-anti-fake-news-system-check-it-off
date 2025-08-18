@@ -19,7 +19,6 @@ export default function VotePage() {
     async function fetchNews() {
       const res = await fetch("/api/news");
       const data = await res.json();
-      // data[i] = { id, title, rowIndex }
       const item = data.find((n) => n.id === id || n.id === parseInt(id));
       setNews(item);
     }
@@ -54,33 +53,14 @@ export default function VotePage() {
       });
 
       const data = await res.json();
+      if (!data.success) return alert("Error: " + data.error);
 
-      if (!data.success) {
-        return alert("Error: " + data.error);
-      }
-
-      // คำนวณ stats
-      let updatedStats = "Unverified";
-      if (data.upVotes > data.downVotes) updatedStats = "Verified";
-      else if (data.downVotes > data.upVotes) updatedStats = "Fake News";
-
-      // อัปเดต state
       setNews((prev) => ({
         ...prev,
         upVotes: data.upVotes,
         downVotes: data.downVotes,
-        stats: updatedStats,
+        stats: data.stats,
       }));
-
-      await fetch("/api/news", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          rowIndex: news.rowIndex, // ใช้ rowIndex ของ Sheet จริง ๆ
-          column: "C",
-          value: updatedStats,
-        }),
-      });
 
       alert("Your vote and comment have been submitted!");
       router.back();
@@ -94,41 +74,28 @@ export default function VotePage() {
 
   if (!news) {
     return (
-      <div
-        className="flex items-center justify-center h-screen"
-        style={{ fontFamily: "Outfit, sans-serif" }}
-      >
+      <div className="flex items-center justify-center h-screen">
         <p className="text-gray-500 text-lg animate-pulse">Loading...</p>
       </div>
     );
   }
 
   return (
-    <div
-      className="p-8 max-w-4xl mx-auto"
-      style={{ fontFamily: "Outfit, sans-serif" }}
-    >
-      {/* Back button */}
+    <div className="p-8 max-w-4xl mx-auto"
+    style={{ fontFamily: "Outfit, sans-serif" }}>
       <button
         onClick={() => router.back()}
         className="mb-6 flex items-center px-3 py-1 bg-gray-100 hover:bg-gray-300 rounded shadow"
       >
-        <Image
-          src="/icon/Card/Back.png"
-          alt="Back"
-          width={20}
-          height={20}
-          className="mr-2"
-        />
+        <Image src="/icon/Card/Back.png" alt="Back" width={20} height={20} className="mr-2" />
         Back to News List
       </button>
 
       <div className="bg-white rounded-lg w-full max-w-4xl h-[600px] p-0 space-y-0">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 h-[600px]">
-          {/* Left side: News details */}
+          {/* Left: News details */}
           <div className="bg-white rounded-lg shadow p-6 space-y-4 border border-gray-200">
             <h1 className="text-3xl font-bold">{news.title}</h1>
-
             <div className="flex justify-center mb-4">
               <span
                 className={`inline-block px-2 py-1 rounded text-md whitespace-nowrap ${
@@ -142,34 +109,23 @@ export default function VotePage() {
                 {news.stats}
               </span>
             </div>
-
             <p className="text-gray-700">{news.description}</p>
             <p className="text-gray-500">
               By {news.author} • {news.date}
             </p>
             <div className="flex gap-4 mt-2">
               <span className="flex items-center gap-1 text-green-600">
-                <Image
-                  src="/icon/Card/Like.png"
-                  alt="Upvote"
-                  width={20}
-                  height={20}
-                />
+                <Image src="/icon/Card/Like.png" alt="Upvote" width={20} height={20} />
                 {news.upVotes} Real
               </span>
               <span className="flex items-center gap-1 text-red-600">
-                <Image
-                  src="/icon/Card/Dislike.png"
-                  alt="Downvote"
-                  width={20}
-                  height={20}
-                />
+                <Image src="/icon/Card/Dislike.png" alt="Downvote" width={20} height={20} />
                 {news.downVotes} Fake
               </span>
             </div>
           </div>
 
-          {/* Right side: Vote form */}
+          {/* Right: Vote form */}
           <div className="bg-white rounded-lg shadow p-6 border border-gray-200">
             <h2 className="text-xl font-bold mb-4">Cast Your Vote</h2>
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -190,62 +146,34 @@ export default function VotePage() {
                 <div className="flex gap-2">
                   <button
                     type="button"
-                    onClick={() =>
-                      setForm((prev) => ({ ...prev, vote: "real" }))
-                    }
-                    className={`flex-1 flex items-center gap-2 px-4 py-2 rounded transition-colors duration-300
-                    ${
+                    onClick={() => setForm((prev) => ({ ...prev, vote: "real" }))}
+                    className={`flex-1 flex items-center gap-2 px-4 py-2 rounded ${
                       form.vote === "real"
                         ? "bg-green-700 text-white"
                         : "bg-gray-100 text-gray-800 hover:bg-green-100 hover:text-green-700"
                     }`}
                   >
-                    <Image
-                      src="/icon/Card/Like.png"
-                      alt="Upvote"
-                      width={25}
-                      height={25}
-                      className={`${
-                        form.vote === "real"
-                          ? "filter brightness-0 invert"
-                          : "filter brightness-0 invert-[0.25]"
-                      }`}
-                    />
+                    <Image src="/icon/Card/Like.png" alt="Upvote" width={25} height={25} />
                     <span>This is Real</span>
                   </button>
 
                   <button
                     type="button"
-                    onClick={() =>
-                      setForm((prev) => ({ ...prev, vote: "fake" }))
-                    }
-                    className={`flex-1 flex items-center gap-2 px-4 py-2 rounded transition-colors duration-300
-                    ${
+                    onClick={() => setForm((prev) => ({ ...prev, vote: "fake" }))}
+                    className={`flex-1 flex items-center gap-2 px-4 py-2 rounded ${
                       form.vote === "fake"
                         ? "bg-red-700 text-white"
                         : "bg-gray-100 text-gray-800 hover:bg-red-100 hover:text-red-700"
                     }`}
                   >
-                    <Image
-                      src="/icon/Card/Dislike.png"
-                      alt="Downvote"
-                      width={25}
-                      height={25}
-                      className={`${
-                        form.vote === "fake"
-                          ? "filter brightness-0 invert"
-                          : "filter brightness-0 invert-[0.25]"
-                      }`}
-                    />
+                    <Image src="/icon/Card/Dislike.png" alt="Downvote" width={25} height={25} />
                     <span>This is Fake</span>
                   </button>
                 </div>
               </div>
 
               <div>
-                <label className="block mb-1 font-semibold">
-                  Your Comment *
-                </label>
+                <label className="block mb-1 font-semibold">Your Comment *</label>
                 <textarea
                   name="comment"
                   value={form.comment}
@@ -257,9 +185,7 @@ export default function VotePage() {
               </div>
 
               <div>
-                <label className="block mb-1 font-semibold">
-                  Supporting Image URL (optional)
-                </label>
+                <label className="block mb-1 font-semibold">Supporting Image URL (optional)</label>
                 <input
                   type="text"
                   name="imageUrl"
@@ -268,9 +194,6 @@ export default function VotePage() {
                   className="w-full border rounded px-3 py-2 border-gray-300"
                   placeholder="https://example.com/image.jpg"
                 />
-                <p className="text-xs text-gray-500">
-                  Add a link to an image that supports your argument
-                </p>
               </div>
 
               <button
