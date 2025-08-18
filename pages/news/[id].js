@@ -29,7 +29,14 @@ export default function NewsDetail() {
     fetchNews();
   }, [id]);
 
-  if (!news) return <p className="p-8">Loading...</p>;
+  if (!news) {
+  return (
+    <div className="flex items-center justify-center h-screen"
+    style={{ fontFamily: "Outfit, sans-serif" }}>
+      <p className="text-gray-500 text-lg animate-pulse">Loading...</p>
+    </div>
+  );
+}
 
   return (
     <div

@@ -39,7 +39,7 @@ export default function VotePage() {
 
     try {
       setLoading(true);
-      const rowIndex = news.id; // use id as index
+      const rowIndex = news.id;
       await fetch("/api/news", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -59,7 +59,15 @@ export default function VotePage() {
     }
   };
 
-  if (!news) return <p className="p-8">Loading...</p>;
+  if (!news) {
+  return (
+    <div className="flex items-center justify-center h-screen"
+    style={{ fontFamily: "Outfit, sans-serif" }}>
+      <p className="text-gray-500 text-lg animate-pulse">Loading...</p>
+    </div>
+  );
+}
+
 
   return (
     <div
@@ -165,8 +173,8 @@ export default function VotePage() {
                       height={25}
                       className={`${
                         form.vote === "real"
-                          ? "filter brightness-0 invert" // เปลี่ยนเป็นขาว
-                          : "filter brightness-0 invert-[0.25]" // เปลี่ยนสีอื่น
+                          ? "filter brightness-0 invert"
+                          : "filter brightness-0 invert-[0.25]"
                       }`}
                     />
 
@@ -192,8 +200,8 @@ export default function VotePage() {
                       height={25}
                       className={`${
                         form.vote === "fake"
-                          ? "filter brightness-0 invert" // เปลี่ยนเป็นขาว
-                          : "filter brightness-0 invert-[0.25]" // เปลี่ยนสีอื่น
+                          ? "filter brightness-0 invert"
+                          : "filter brightness-0 invert-[0.25]"
                       }`}
                     />
                     <span>This is Fake</span>

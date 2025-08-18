@@ -22,7 +22,15 @@ export default function NewsCard({ news: propNews, id }) {
     fetchNews();
   }, [propNews, id]);
 
-  if (!news) return <p>Loading...</p>;
+  if (!news) {
+  return (
+    <div className="flex items-center justify-center h-screen"
+    style={{ fontFamily: "Outfit, sans-serif" }}>
+      <p className="text-gray-500 text-lg animate-pulse">Loading...</p>
+    </div>
+  );
+}
+
 
   return (
     <div
