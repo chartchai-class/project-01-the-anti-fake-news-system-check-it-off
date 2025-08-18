@@ -1,3 +1,4 @@
+// It is page after clicking on View Details button in NewsCard
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Image from "next/image";
@@ -13,21 +14,34 @@ export default function NewsDetail() {
   };
 
   useEffect(() => {
-    if (!id) return;
+  if (!id) return;
 
-    async function fetchNews() {
-      try {
-        const res = await fetch(`/api/news?startRow=0&endRow=25`); // ดึง row 0–100
-        const data = await res.json();
-        const item = data.find((n) => n.id === id || n.id === parseInt(id));
-        setNews(item);
-      } catch (err) {
-        console.error(err);
+  async function fetchNews() {
+    try {
+      const res = await fetch(`/api/news?startRow=0&endRow=25`);
+      const data = await res.json();
+      const item = data.find((n) => n.id === id || n.id === parseInt(id));
+
+      if (item) {
+        // คำนวณ stats
+        let updatedStats = "Unverified";
+        if (item.upVotes > item.downVotes) updatedStats = "Verified";
+        else if (item.downVotes > item.upVotes) updatedStats = "Fake News";
+
+        // อัปเดต state
+        setNews({
+          ...item,
+          stats: updatedStats,
+        });
       }
+    } catch (err) {
+      console.error(err);
     }
+  }
 
-    fetchNews();
-  }, [id]);
+  fetchNews();
+}, [id]);
+
 
   if (!news) {
   return (
@@ -123,7 +137,7 @@ export default function NewsDetail() {
         {news.image && (
           <div className="w-full h-64 relative mb-4">
             <Image
-              src={news.image} // "/news/images/1.jpg"
+              src={news.image}
               alt={news.title}
               fill
               style={{ objectFit: "cover" }}

@@ -37,12 +37,29 @@ export default async function handler(req, res) {
     if (type === "up") upVotes++;
     if (type === "down") downVotes++;
 
-    await sheets.spreadsheets.values.update({
-      spreadsheetId,
-      range: `${sheetName}!H${rowIndex + 1}:I${rowIndex + 1}`,
-      valueInputOption: "RAW",
-      resource: { values: [[upVotes, downVotes]] },
-    });
+   // อัปเดต Column H/I เสร็จแล้ว
+await sheets.spreadsheets.values.update({
+  spreadsheetId,
+  range: `${sheetName}!H${rowIndex + 1}:I${rowIndex + 1}`,
+  valueInputOption: "RAW",
+  resource: { values: [[upVotes, downVotes]] },
+});
+
+
+let updatedStats = "Under Review";
+if (upVotes > downVotes) updatedStats = "Verified";
+else if (downVotes > upVotes) updatedStats = "Fake News";
+
+await sheets.spreadsheets.values.update({
+  spreadsheetId,
+  range: `${sheetName}!C${rowIndex + 1}`,
+  valueInputOption: "USER_ENTERED",
+  resource: { values: [[updatedStats]] },
+});
+
+// ส่งกลับไป client
+res.status(200).json({ success: true, upVotes, downVotes, stats: updatedStats });
+
 
     res.status(200).json({ success: true, upVotes, downVotes });
   } catch (err) {

@@ -1,3 +1,4 @@
+// Home Page
 import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import NewsCard from "../components/NewsCard";
@@ -12,7 +13,9 @@ export default function Home() {
       try {
         const res = await fetch(`/api/news?startRow=0&endRow=25`);
         const data = await res.json();
-        setNewsList(data);
+
+        const updatedNews = updateStats(data);
+        setNewsList(updatedNews);
       } catch (err) {
         console.error(err);
       }
@@ -20,13 +23,26 @@ export default function Home() {
     fetchNews();
   }, []);
 
-  // Filter ข่าวตาม stats
+  function updateStats(newsArray) {
+  return newsArray.map((news) => {
+    if (news.stats === "Under Review") {
+      if (news.upVotes > news.downVotes) {
+        return { ...news, stats: "Verified" };
+      } else if (news.downVotes > news.upVotes) {
+        return { ...news, stats: "Fake News" };
+      }
+    }
+    return news;
+  });
+}
+
+
+
   const filteredNews =
     filter === "All News"
       ? newsList
       : newsList.filter((n) => n.stats === filter);
 
-  // ฟังก์ชันเพิ่มจำนวนข่าว
   const loadMore = () => {
     if (itemsPerPage === 6) setItemsPerPage(12);
     else if (itemsPerPage === 12) setItemsPerPage(24);

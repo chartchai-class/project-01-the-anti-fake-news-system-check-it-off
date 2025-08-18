@@ -14,12 +14,12 @@ export default function VotePage() {
   });
   const [loading, setLoading] = useState(false);
 
-  // Fetch news item
   useEffect(() => {
     if (!id) return;
     async function fetchNews() {
       const res = await fetch("/api/news");
       const data = await res.json();
+      // data[i] = { id, title, rowIndex }
       const item = data.find((n) => n.id === id || n.id === parseInt(id));
       setNews(item);
     }
@@ -39,13 +39,46 @@ export default function VotePage() {
 
     try {
       setLoading(true);
-      const rowIndex = news.id;
+
+      // POST vote & comment
+      const res = await fetch("/api/vote", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id: news.id,
+          type: form.vote === "real" ? "up" : "down",
+          name: form.name,
+          comment: form.comment,
+          imageUrl: form.imageUrl || "",
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!data.success) {
+        return alert("Error: " + data.error);
+      }
+
+      // คำนวณ stats
+      let updatedStats = "Unverified";
+      if (data.upVotes > data.downVotes) updatedStats = "Verified";
+      else if (data.downVotes > data.upVotes) updatedStats = "Fake News";
+
+      // อัปเดต state
+      setNews((prev) => ({
+        ...prev,
+        upVotes: data.upVotes,
+        downVotes: data.downVotes,
+        stats: updatedStats,
+      }));
+
       await fetch("/api/news", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          rowIndex,
-          type: form.vote === "real" ? "up" : "down",
+          rowIndex: news.rowIndex, // ใช้ rowIndex ของ Sheet จริง ๆ
+          column: "C",
+          value: updatedStats,
         }),
       });
 
@@ -60,14 +93,15 @@ export default function VotePage() {
   };
 
   if (!news) {
-  return (
-    <div className="flex items-center justify-center h-screen"
-    style={{ fontFamily: "Outfit, sans-serif" }}>
-      <p className="text-gray-500 text-lg animate-pulse">Loading...</p>
-    </div>
-  );
-}
-
+    return (
+      <div
+        className="flex items-center justify-center h-screen"
+        style={{ fontFamily: "Outfit, sans-serif" }}
+      >
+        <p className="text-gray-500 text-lg animate-pulse">Loading...</p>
+      </div>
+    );
+  }
 
   return (
     <div
@@ -177,7 +211,6 @@ export default function VotePage() {
                           : "filter brightness-0 invert-[0.25]"
                       }`}
                     />
-
                     <span>This is Real</span>
                   </button>
 
