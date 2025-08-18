@@ -7,23 +7,9 @@ export default function NewsDetail() {
   const { id } = router.query;
   const [news, setNews] = useState(null);
 
-  const handleVote = async (type) => {
-    try {
-      const rowIndex = parseInt(id);
-      await fetch("/api/news", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ rowIndex, type }),
-      });
+  const goToVotePage = () => {
 
-      setNews((prev) => ({
-        ...prev,
-        upVotes: type === "up" ? prev.upVotes + 1 : prev.upVotes,
-        downVotes: type === "down" ? prev.downVotes + 1 : prev.downVotes,
-      }));
-    } catch (err) {
-      console.error("Vote failed", err);
-    }
+    router.push(`/vote?id=${news.id}`);
   };
 
   useEffect(() => {
@@ -70,7 +56,7 @@ export default function NewsDetail() {
 
         <div className="flex flex-wrap items-center gap-4 text-sm">
           <span
-            className={`inline-block px-2 py-1 rounded text-sm ${
+            className={`inline-block px-2 py-1 rounded text-lg ${
               news.stats === "Verified"
                 ? "bg-green-100 text-green-700"
                 : news.stats === "Fake News"
@@ -93,22 +79,9 @@ export default function NewsDetail() {
           <span className="text-gray-600">{news.date}</span>
         </div>
 
-        {/* News Image */}
-        {news.image && (
-          <div className="w-full h-64 relative mb-4">
-            <Image
-              src={news.image} // "/news/images/1.jpg"
-              alt={news.title}
-              fill
-              style={{ objectFit: "cover" }}
-              className="rounded-lg"
-            />
-          </div>
-        )}
-
         {/* Votes and Comments */}
         <div className="flex flex-wrap items-center gap-4 mt-2">
-          <button className="flex items-center gap-1 px-3 py-1 bg-green-50 hover:bg-green-100 rounded">
+          <button className="flex items-center gap-1 px-3 py-1 bg-green-50 rounded">
             <Image
               src="/icon/Card/Like.png"
               alt="Like"
@@ -118,7 +91,7 @@ export default function NewsDetail() {
             {news.upVotes}
           </button>
 
-          <button className="flex items-center gap-1 px-3 py-1 bg-red-50 hover:bg-red-100 rounded">
+          <button className="flex items-center gap-1 px-3 py-1 bg-red-50 rounded">
             <Image
               src="/icon/Card/Dislike.png"
               alt="Dislike"
@@ -139,6 +112,19 @@ export default function NewsDetail() {
           </button>
         </div>
 
+        {/* News Image */}
+        {news.image && (
+          <div className="w-full h-64 relative mb-4">
+            <Image
+              src={news.image} // "/news/images/1.jpg"
+              alt={news.title}
+              fill
+              style={{ objectFit: "cover" }}
+              className="rounded-lg"
+            />
+          </div>
+        )}
+
         {/* Description */}
         <div className="mt-4 text-gray-700 whitespace-pre-line">
           {news.fullDescription || news.description}
@@ -147,8 +133,10 @@ export default function NewsDetail() {
         <div className="h-px bg-gray-300 w-full"></div>
 
         {/* Optional: Add more buttons like "View Full Comments" */}
-        <div className="mt-6 flex gap-4 ">
-          <button className="w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+        <div className="mt-6 flex gap-4 " >
+          <button className="w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          onClick={goToVotePage}
+          >
             Vote on This News
           </button>
 
