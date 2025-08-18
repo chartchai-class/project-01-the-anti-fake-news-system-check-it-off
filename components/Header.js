@@ -11,7 +11,7 @@ export default function Header() {
   ]);
 
   useEffect(() => {
-  fetch("/api/news?startRow=0&endRow=25") // fetch from your Google Sheets API
+  fetch("/api/news?startRow=0&endRow=25")
     .then((response) => response.json())
     .then((news) => { 
       setStats([

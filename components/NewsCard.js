@@ -1,3 +1,4 @@
+// It is a Card that Show on Home Page
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
