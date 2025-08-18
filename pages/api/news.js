@@ -1,3 +1,4 @@
+// It is API route collecting data from Google Sheets News Database
 import { google } from "googleapis";
 import path from "path";
 
@@ -12,7 +13,9 @@ const auth = new google.auth.GoogleAuth({
 const spreadsheetId = "1xXd_djAF1jp7c5jrY-mzAwVYxSN9wbl_0RTpKKvH0AA";
 const sheetName = "Sheet1";
 
+
 export default async function handler(req, res) {
+  
   res.setHeader("Cache-Control", "no-store");
   const client = await auth.getClient();
   const sheets = google.sheets({ version: "v4", auth: client });
@@ -21,7 +24,7 @@ export default async function handler(req, res) {
   if (req.method === "GET") {
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId,
-      range: `${sheetName}!A:K`, // A–K ครอบคลุม fullDescription
+      range: `${sheetName}!A:K`,
     });
 
     const rows = response.data.values || [];
@@ -113,6 +116,42 @@ export default async function handler(req, res) {
 
     return res.status(200).json({ message: "Voted successfully" });
   }
+
+  if (req.method === "PUT") {
+  const { id, type } = req.body;
+
+  const rowResponse = await sheets.spreadsheets.values.get({
+    spreadsheetId,
+    range: `${sheetName}!A:K`,
+  });
+
+  const rows = rowResponse.data.values || [];
+  const headerOffset = 1;
+
+  const rowIndex = rows.findIndex((r, i) => i >= headerOffset && r[0] === String(id));
+  if (rowIndex === -1) {
+    return res.status(404).json({ message: "News item not found" });
+  }
+
+  const row = rows[rowIndex];
+  let upVotes = parseInt(row[7] || 0);
+  let downVotes = parseInt(row[8] || 0);
+
+  if (type === "up") upVotes += 1;
+  if (type === "down") downVotes += 1;
+
+  const sheetRow = rowIndex + 1;
+
+  await sheets.spreadsheets.values.update({
+    spreadsheetId,
+    range: `${sheetName}!H${sheetRow}:I${sheetRow}`,
+    valueInputOption: "RAW",
+    resource: { values: [[upVotes, downVotes]] },
+  });
+
+  return res.status(200).json({ message: "Voted successfully", upVotes, downVotes });
+}
+
 
   res.status(405).json({ message: "Method not allowed" });
 }
