@@ -59,36 +59,28 @@ export default async function handler(req, res) {
       resource: { values: [[updatedStatus]] },
     });
 
-    // 2️⃣ Append comment ลง Sheet2 (ไม่เก็บ updatedStatus)
     const readComments = await sheets.spreadsheets.values.get({
       spreadsheetId,
-      range: `${sheetComments}!A:G`,
+      range: `${sheetComments}!A:E`,
     });
 
     const commentRows = readComments.data.values || [];
-    const nextCommentId =
-      commentRows.length > 0
-        ? parseInt(commentRows[commentRows.length - 1][0], 10) + 1
-        : 1;
-    const createdAt = new Date().toISOString();
 
     const newComment = [
-      nextCommentId,
       id,
       name,
       type,
       comment || "",
-      createdAt,
+      imageUrl || "",
     ];
 
     await sheets.spreadsheets.values.append({
       spreadsheetId,
-      range: `${sheetComments}!A:G`,
+      range: `${sheetComments}!A:E`,
       valueInputOption: "USER_ENTERED",
       resource: { values: [newComment] },
     });
 
-    // ส่งกลับ frontend
     res.status(200).json({
       success: true,
       upVotes,
