@@ -13,6 +13,10 @@ export default function NewsDetail() {
     router.push(`/vote?id=${news.id}`);
   };
 
+  const goToCommentsPage = () => {
+    router.push(`/comments?id=${news.id}`);
+  }
+
   useEffect(() => {
   if (!id) return;
 
@@ -161,8 +165,9 @@ export default function NewsDetail() {
             Vote on This News
           </button>
 
-          <button className="w-full px-4 py-2 bg-gray-200 rounded hover:bg-gray-300">
-            View More Comments ({news.comments})
+          <button className="w-full px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
+          onClick={goToCommentsPage}>
+            View More Comments
           </button>
         </div>
       </div>
