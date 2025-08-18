@@ -1,3 +1,4 @@
+// Header
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
@@ -16,7 +17,7 @@ export default function Header() {
       setStats([
         { 
           label: "Total News", 
-          value: news.length, 
+          value: Math.max(...news.map(n => n.id)), 
           icon: "/icon/Total-News.png", 
           color: "text-blue-600" 
         },
