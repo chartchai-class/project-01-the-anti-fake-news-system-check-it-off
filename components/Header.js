@@ -9,7 +9,7 @@ export default function Header() {
   { label: "Fake News", value: 0, icon: "/icon/Fake-News.png", color: "text-red-500" },
   { label: "Under Review", value: 0, icon: "/icon/Under-Review.png", color: "text-yellow-500" },
   ]);
-
+             
   useEffect(() => {
   fetch("/api/news?startRow=0&endRow=25")
     .then((response) => response.json())
