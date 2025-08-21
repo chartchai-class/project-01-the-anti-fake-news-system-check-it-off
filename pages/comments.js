@@ -19,7 +19,7 @@ export default function CommentsPage() {
 
     async function fetchSheet1Data() {
       try {
-        const SHEET1_GID = "0"; // gid ของ Sheet1 (เปลี่ยนตามจริง)
+        const SHEET1_GID = "0";
         const res = await fetch(
           `https://docs.google.com/spreadsheets/d/1xXd_djAF1jp7c5jrY-mzAwVYxSN9wbl_0RTpKKvH0AA/gviz/tq?tqx=out:json&gid=${SHEET1_GID}`
         );
@@ -61,7 +61,7 @@ export default function CommentsPage() {
         const json = JSON.parse(text.match(/.*?({.*}).*/s)[1]);
 
         const filteredComments = json.table.rows
-          .filter((r) => String(r.c[0]?.v) === String(id)) // กรองด้วย newsId
+          .filter((r) => String(r.c[0]?.v) === String(id))
           .map((r) => ({
             name: r.c[1]?.v || "Anonymous",
             status: r.c[2]?.v || "",
@@ -163,47 +163,54 @@ export default function CommentsPage() {
       <h3 className="text-2xl font-semibold mt-8 mb-4">Comments & Votes</h3>
 
       <div className="mt-4">
-        {comments.length === 0 ? (
-          <p className="text-gray-500">No comments yet.</p>
-        ) : (
-          comments.map((c, idx) => (
-            <div
-              key={idx}
-              className="border-b border-gray-200 py-3 flex items-start gap-3"
-            >
-              <div className="flex-1 flex flex-col gap-1 break-words">
-                {/* บรรทัดบน: Name + Status */}
-                <div className="flex items-center gap-2">
-                  <p className="font-semibold">{c.name}</p>
-                  {c.status && (
-                    <span
-                      className={`inline-block px-2 py-1 rounded text-sm ${
-                        c.status === "up"
-                          ? "bg-green-100 text-green-700"
-                          : c.status === "down"
-                          ? "bg-red-100 text-red-700"
-                          : "bg-yellow-100 text-yellow-700"
-                      }`}
-                    >
-                      {c.status === "up"
-                        ? "Real"
+        {comments.map((c, idx) => (
+          <div
+            key={idx}
+            className="border-b border-gray-200 py-3 flex items-start gap-3 mt-10"
+          >
+            <div className="flex-1 flex flex-col gap-1 break-words">
+              {/* บรรทัดบน: Name + Status */}
+              <div className="flex items-center gap-2">
+                <p className="font-semibold">{c.name}</p>
+                {c.status && (
+                  <span
+                    className={`inline-block px-2 py-1 rounded text-sm ${
+                      c.status === "up"
+                        ? "bg-green-100 text-green-700"
                         : c.status === "down"
-                        ? "Fake"
-                        : c.status}
-                    </span>
-                  )}
-                </div>
+                        ? "bg-red-100 text-red-700"
+                        : "bg-yellow-100 text-yellow-700"
+                    }`}
+                  >
+                    {c.status === "up"
+                      ? "Real"
+                      : c.status === "down"
+                      ? "Fake"
+                      : c.status}
+                  </span>
+                )}
+              </div>
 
-                {/* บรรทัดล่าง: Comment + Date */}
-                <div className="flex flex-col gap-1">
-                  {c.comment && <p>{c.comment}</p>}
-                  {c.date && <p className="text-xs text-gray-400">{c.date}</p>}
-                </div>
+              {/* รูปภาพ เฉพาะถ้ามี */}
+              {c.imageUrl && c.imageUrl.trim() !== "" && (
+                <Image
+                  src={c.imageUrl.trim()}
+                  alt={c.name}
+                  width={400}
+                  height={40}
+                  className="object-cover rounded"
+                  unoptimized
+                />
+              )}
 
+              {/* บรรทัดล่าง: Comment + Date */}
+              <div className="flex flex-col gap-1">
+                {c.comment && <p>{c.comment}</p>}
+                {c.date && <p className="text-xs text-gray-400">{c.date}</p>}
               </div>
             </div>
-          ))
-        )}
+          </div>
+        ))}
       </div>
     </div>
   );

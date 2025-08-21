@@ -2,7 +2,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["tse4.mm.bing.net"], // เพิ่ม hostname ของรูป
+    domains: [
+      "img.freepik.com",
+      "images.unsplash.com"
+    ],
   },
 };
 
