@@ -26,19 +26,17 @@ export default function Home() {
   }, []);
 
   function updateStats(newsArray) {
-  return newsArray.map((news) => {
-    if (news.stats === "Under Review") {
-      if (news.upVotes > news.downVotes) {
-        return { ...news, stats: "Verified" };
-      } else if (news.downVotes > news.upVotes) {
-        return { ...news, stats: "Fake News" };
+    return newsArray.map((news) => {
+      if (news.stats === "Under Review") {
+        if (news.upVotes > news.downVotes) {
+          return { ...news, stats: "Verified" };
+        } else if (news.downVotes > news.upVotes) {
+          return { ...news, stats: "Fake News" };
+        }
       }
-    }
-    return news;
-  });
-}
-
-
+      return news;
+    });
+  }
 
   const filteredNews =
     filter === "All News"
@@ -101,18 +99,17 @@ export default function Home() {
         ))}
       </div>
 
-      {newsLoaded && itemsPerPage < 24 && (
-  <div className="flex justify-center mt-6">
-    <button
-      onClick={loadMore}
-      className="px-6 py-2 bg-blue-500 text-white rounded-xl hover:bg-blue-600"
-      style={{ fontFamily: "Outfit, sans-serif" }}
-    >
-      More
-    </button>
-  </div>
-)}
-
+      {newsLoaded && itemsPerPage < filteredNews.length && (
+        <div className="flex justify-center mt-6">
+          <button
+            onClick={loadMore}
+            className="px-6 py-2 bg-blue-500 text-white rounded-xl hover:bg-blue-600"
+            style={{ fontFamily: "Outfit, sans-serif" }}
+          >
+            More
+          </button>
+        </div>
+      )}
     </div>
   );
 }
