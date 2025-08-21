@@ -7,6 +7,7 @@ export default function Home() {
   const [newsList, setNewsList] = useState([]);
   const [filter, setFilter] = useState("All News");
   const [itemsPerPage, setItemsPerPage] = useState(6);
+  const [newsLoaded, setNewsLoaded] = useState(false);
 
   useEffect(() => {
     async function fetchNews() {
@@ -16,6 +17,7 @@ export default function Home() {
 
         const updatedNews = updateStats(data);
         setNewsList(updatedNews);
+        setNewsLoaded(true);
       } catch (err) {
         console.error(err);
       }
@@ -99,17 +101,18 @@ export default function Home() {
         ))}
       </div>
 
-      {itemsPerPage < filteredNews.length && (
-        <div className="flex justify-center mt-6">
-          <button
-            onClick={loadMore}
-            className="px-6 py-2 bg-blue-500 text-white rounded-xl hover:bg-blue-600"
-            style={{ fontFamily: "Outfit, sans-serif" }}
-          >
-            More
-          </button>
-        </div>
-      )}
+      {newsLoaded && itemsPerPage < 24 && (
+  <div className="flex justify-center mt-6">
+    <button
+      onClick={loadMore}
+      className="px-6 py-2 bg-blue-500 text-white rounded-xl hover:bg-blue-600"
+      style={{ fontFamily: "Outfit, sans-serif" }}
+    >
+      More
+    </button>
+  </div>
+)}
+
     </div>
   );
 }
