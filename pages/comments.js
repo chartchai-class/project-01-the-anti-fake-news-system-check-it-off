@@ -27,7 +27,6 @@ export default function CommentsPage() {
         const text = await res.text();
         const json = JSON.parse(text.match(/.*?({.*}).*/s)[1]);
 
-        // หาข่าวเดียวที่ตรงกับ id
         const newsRow = json.table.rows.find(
           (r) => String(r.c[0]?.v) === String(id)
         );

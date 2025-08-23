@@ -1,4 +1,5 @@
 // Home Page
+// Website to show all news Done, Complteted
 import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import NewsCard from "../components/NewsCard";
@@ -15,7 +16,6 @@ export default function Home() {
         const res = await fetch(`/api/news?startRow=0&endRow=25`);
         const data = await res.json();
 
-        // ตรวจสอบว่า data เป็น array หรือไม่
         if (!Array.isArray(data)) {
           console.error("API returned non-array data:", data);
           setNewsList([]);

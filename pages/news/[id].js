@@ -27,12 +27,10 @@ export default function NewsDetail() {
       const item = data.find((n) => n.id === id || n.id === parseInt(id));
 
       if (item) {
-        // คำนวณ stats
         let updatedStats = "Unverified";
         if (item.upVotes > item.downVotes) updatedStats = "Verified";
         else if (item.downVotes > item.upVotes) updatedStats = "Fake News";
 
-        // อัปเดต state
         setNews({
           ...item,
           stats: updatedStats,

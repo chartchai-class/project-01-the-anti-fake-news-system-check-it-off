@@ -7,7 +7,7 @@ export default function NewsCard({ news: propNews, id }) {
   const [news, setNews] = useState(propNews || null);
 
   useEffect(() => {
-    if (propNews) return;
+    if (propNews || !id) return;
 
     async function fetchNews() {
       try {
