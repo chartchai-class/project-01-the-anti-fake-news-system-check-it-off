@@ -48,8 +48,15 @@ export default function Header() {
   return (
     <header className="text-center mb-8 p-6 rounded-lg shadow-md bg-gradient-to-r from-blue-200 via-blue-100 to-green-100">
       <h1
-        className="text-6xl font-bold mt-4"
+        className="text-7xl font-bold mt-4"
         style={{ color: "#3380f2", fontFamily: "Outfit, sans-serif" }}
+      >
+        Check It Off
+      </h1>
+
+      <h1
+        className="text-6xl font-bold mt-4 text-green-400 "
+        style={{fontFamily: "Outfit, sans-serif" }}
       >
         Social Anti-Fake News System
       </h1>

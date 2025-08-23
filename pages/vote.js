@@ -81,13 +81,21 @@ export default function VotePage() {
   }
 
   return (
-    <div className="p-8 max-w-4xl mx-auto"
-    style={{ fontFamily: "Outfit, sans-serif" }}>
+    <div
+      className="p-8 max-w-4xl mx-auto"
+      style={{ fontFamily: "Outfit, sans-serif" }}
+    >
       <button
         onClick={() => router.back()}
         className="mb-6 flex items-center px-3 py-1 bg-gray-100 hover:bg-gray-300 rounded shadow"
       >
-        <Image src="/icon/Card/Back.png" alt="Back" width={20} height={20} className="mr-2" />
+        <Image
+          src="/icon/Card/Back.png"
+          alt="Back"
+          width={20}
+          height={20}
+          className="mr-2"
+        />
         Back to News List
       </button>
 
@@ -115,11 +123,21 @@ export default function VotePage() {
             </p>
             <div className="flex gap-4 mt-2">
               <span className="flex items-center gap-1 text-green-600">
-                <Image src="/icon/Card/Like.png" alt="Upvote" width={20} height={20} />
+                <Image
+                  src="/icon/Card/Like.png"
+                  alt="Upvote"
+                  width={20}
+                  height={20}
+                />
                 {news.upVotes} Real
               </span>
               <span className="flex items-center gap-1 text-red-600">
-                <Image src="/icon/Card/Dislike.png" alt="Downvote" width={20} height={20} />
+                <Image
+                  src="/icon/Card/Dislike.png"
+                  alt="Downvote"
+                  width={20}
+                  height={20}
+                />
                 {news.downVotes} Fake
               </span>
             </div>
@@ -146,34 +164,56 @@ export default function VotePage() {
                 <div className="flex gap-2">
                   <button
                     type="button"
-                    onClick={() => setForm((prev) => ({ ...prev, vote: "real" }))}
+                    onClick={() =>
+                      setForm((prev) => ({ ...prev, vote: "real" }))
+                    }
                     className={`flex-1 flex items-center gap-2 px-4 py-2 rounded ${
                       form.vote === "real"
                         ? "bg-green-700 text-white"
                         : "bg-gray-100 text-gray-800 hover:bg-green-100 hover:text-green-700"
                     }`}
                   >
-                    <Image src="/icon/Card/Like.png" alt="Upvote" width={25} height={25} />
+                    <Image
+                      src="/icon/Card/Like.png"
+                      alt="Upvote"
+                      width={25}
+                      height={25}
+                      className={
+                        form.vote === "real" ? "filter invert brightness-0" : ""
+                      }
+                    />
                     <span>This is Real</span>
                   </button>
 
                   <button
                     type="button"
-                    onClick={() => setForm((prev) => ({ ...prev, vote: "fake" }))}
+                    onClick={() =>
+                      setForm((prev) => ({ ...prev, vote: "fake" }))
+                    }
                     className={`flex-1 flex items-center gap-2 px-4 py-2 rounded ${
                       form.vote === "fake"
                         ? "bg-red-700 text-white"
                         : "bg-gray-100 text-gray-800 hover:bg-red-100 hover:text-red-700"
                     }`}
                   >
-                    <Image src="/icon/Card/Dislike.png" alt="Downvote" width={25} height={25} />
+                    <Image
+                      src="/icon/Card/Dislike.png"
+                      alt="Downvote"
+                      width={25}
+                      height={25}
+                      className={
+                        form.vote === "fake" ? "filter invert brightness-0" : ""
+                      }
+                    />
                     <span>This is Fake</span>
                   </button>
                 </div>
               </div>
 
               <div>
-                <label className="block mb-1 font-semibold">Your Comment *</label>
+                <label className="block mb-1 font-semibold">
+                  Your Comment *
+                </label>
                 <textarea
                   name="comment"
                   value={form.comment}
@@ -185,7 +225,9 @@ export default function VotePage() {
               </div>
 
               <div>
-                <label className="block mb-1 font-semibold">Supporting Image URL (optional)</label>
+                <label className="block mb-1 font-semibold">
+                  Supporting Image URL (optional)
+                </label>
                 <input
                   type="text"
                   name="imageUrl"
