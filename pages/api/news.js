@@ -2,7 +2,10 @@ import { google } from "googleapis";
 import path from "path";
 
 const auth = new google.auth.GoogleAuth({
-  keyFile: path.join(process.cwd(), "secret/newsdatabaseproject-168367164553.json"),
+  keyFile: path.join(
+    process.cwd(),
+    "secret/newsdatabaseproject-168367164553.json"
+  ),
   scopes: ["https://www.googleapis.com/auth/spreadsheets"],
 });
 
@@ -31,11 +34,13 @@ export default async function handler(req, res) {
       const commentsRows = commentsRes.data.values || [];
 
       const data = rows
-        .slice(1)
+        //.slice(1) // ลองเอาออกถ้า row แรกเป็นข้อมูลจริง
         .filter((row) => row[0] && row[1])
         .map((row) => {
           const id = row[0];
-          const commentCount = commentsRows.filter((c) => c[0] === id).length;
+          const commentCount = commentsRows.filter(
+            (c) => String(c[0]) === String(id)
+          ).length;
           return {
             id: String(id),
             title: row[1],
