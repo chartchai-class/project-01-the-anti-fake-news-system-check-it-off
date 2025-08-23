@@ -48,6 +48,8 @@ export default function Home() {
     else if (itemsPerPage === 12) setItemsPerPage(24);
   };
 
+  const validNews = filteredNews.filter((news) => news.id && news.title);
+
   return (
     <div className="p-8">
       <Header />
@@ -94,7 +96,7 @@ export default function Home() {
 
       {/* News Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
-        {filteredNews.slice(0, itemsPerPage).map((newsItem) => (
+        {validNews.slice(0, itemsPerPage).map((newsItem) => (
           <NewsCard key={newsItem.id} news={newsItem} />
         ))}
       </div>
