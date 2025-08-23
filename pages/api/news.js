@@ -1,16 +1,24 @@
 import { google } from "googleapis";
-import path from "path";
 
-const auth = new google.auth.GoogleAuth({
-  keyFile: path.join(process.cwd(), "secret/newsdatabaseproject-168367164553.json"),
-  scopes: ["https://www.googleapis.com/auth/spreadsheets"],
-});
-
-const spreadsheetId = "1xXd_djAF1jp7c5jrY-mzAwVYxSN9wbl_0RTpKKvH0AA";
+const spreadsheetId = process.env.GOOGLE_SHEET_ID;
 const sheetName = "Sheet1";
 
 export default async function handler(req, res) {
   res.setHeader("Cache-Control", "no-store");
+
+  const credentials = process.env.GOOGLE_SERVICE_ACCOUNT;
+  if (!credentials) {
+    return res
+      .status(500)
+      .json({ message: "Google Service Account credentials are missing." });
+  }
+
+  // สร้าง auth client จาก environment variable
+  const auth = new google.auth.GoogleAuth({
+    credentials: JSON.parse(credentials),
+    scopes: ["https://www.googleapis.com/auth/spreadsheets"],
+  });
+
   const client = await auth.getClient();
   const sheets = google.sheets({ version: "v4", auth: client });
 
