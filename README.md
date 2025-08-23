@@ -45,9 +45,10 @@ npm install
 yarn install
 # or
 pnpm install
+```
 
+```bash
 Start the development server:
-
 npm run dev
 # or
 yarn dev
@@ -60,6 +61,6 @@ Open http://localhost:3000 in your browser
 Links
 Localhost: http://localhost:3000
 
-Deployment (Vercel): https://project-01-the-anti-fake-news-syste-pi.vercel.app/
+Deployment (Vercel): https://project-01-the-anti-fake-news-syste-pi.vercel.app/ (Failed)
 
 YouTube Demo: https://www.youtube.com/ <!-- replace with your actual video link -->
