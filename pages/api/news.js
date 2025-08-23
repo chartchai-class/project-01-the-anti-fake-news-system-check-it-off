@@ -20,18 +20,32 @@ export default async function handler(req, res) {
   const client = await auth.getClient();
   const sheets = google.sheets({ version: "v4", auth: client });
 
-  // ================= GET =================
-  if (req.method === "GET") {
-    const response = await sheets.spreadsheets.values.get({
-      spreadsheetId,
-      range: `${sheetName}!A:K`,
-    });
+  // GET method
+if (req.method === "GET") {
+  // ดึงข่าวจาก Sheet1
+  const response = await sheets.spreadsheets.values.get({
+    spreadsheetId,
+    range: `${sheetName}!A:K`,
+  });
+  const rows = response.data.values || [];
+  if (!rows.length) return res.status(200).json([]);
 
-    const rows = response.data.values || [];
-    if (!rows.length) return res.status(200).json([]);
+  // ดึงคอมเมนต์จาก Sheet2
+  const COMMENTS_SHEET = "Sheet2"; // เปลี่ยนเป็นชื่อ Sheet2 ของคุณ
+  const commentsRes = await sheets.spreadsheets.values.get({
+    spreadsheetId,
+    range: `${COMMENTS_SHEET}!A:E`, // A: newsId, B: name, ...
+  });
+  const commentsRows = commentsRes.data.values || [];
 
-    const data = rows.slice(1).map((row) => ({
-      id: row[0] || "",
+  const data = rows.slice(1).map((row) => {
+    const id = row[0] || "";
+
+    // นับจำนวนคอมเมนต์ที่ตรงกับ newsId
+    const commentCount = commentsRows.filter((c) => c[0] === id).length;
+
+    return {
+      id,
       title: row[1] || "",
       stats: row[2] || "",
       description: row[3] || "",
@@ -41,11 +55,13 @@ export default async function handler(req, res) {
       date: row[6] || "",
       upVotes: parseInt(row[7] || 0),
       downVotes: parseInt(row[8] || 0),
-      comments: parseInt(row[9] || 0),
-    }));
+      comments: commentCount, // ✅ ใช้จำนวนจาก Sheet2
+    };
+  });
 
-    return res.status(200).json(data);
-  }
+  return res.status(200).json(data);
+}
+
 
   // ================= POST =================
   if (req.method === "POST") {

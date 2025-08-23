@@ -167,7 +167,7 @@ export default function NewsDetail() {
 
           <button className="w-full px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
           onClick={goToCommentsPage}>
-            View More Comments
+            View More Comments ({news.comments})
           </button>
         </div>
       </div>

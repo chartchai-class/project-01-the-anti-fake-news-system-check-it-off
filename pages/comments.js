@@ -11,7 +11,8 @@ export default function CommentsPage() {
   const [comments, setComments] = useState([]);
 
   const goToVotePage = () => {
-    router.push(`/vote?id=${news.id}`);
+    router.push(`/vote?id=${news.id}&from=comments`);
+
   };
 
   useEffect(() => {

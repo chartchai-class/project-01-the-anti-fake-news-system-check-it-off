@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function VotePage() {
   const router = useRouter();
-  const { id } = router.query;
+  const { id, from } = router.query || {};
   const [news, setNews] = useState(null);
   const [form, setForm] = useState({
     name: "",
@@ -85,19 +85,21 @@ export default function VotePage() {
       className="p-8 max-w-4xl mx-auto"
       style={{ fontFamily: "Outfit, sans-serif" }}
     >
-      <button
-        onClick={() => router.back()}
-        className="mb-6 flex items-center px-3 py-1 bg-gray-100 hover:bg-gray-300 rounded shadow"
-      >
-        <Image
-          src="/icon/Card/Back.png"
-          alt="Back"
-          width={20}
-          height={20}
-          className="mr-2"
-        />
-        Back to News List
-      </button>
+      {router.isReady && (
+        <button
+          onClick={() => router.back()}
+          className="mb-6 flex items-center px-3 py-1 bg-gray-100 hover:bg-gray-300 rounded shadow"
+        >
+          <Image
+            src="/icon/Card/Back.png"
+            alt="Back"
+            width={20}
+            height={20}
+            className="mr-2"
+          />
+          {from === "comments" ? "Back to News Comments" : "Back to News Details"}
+        </button>
+      )}
 
       <div className="bg-white rounded-lg w-full max-w-4xl h-[600px] p-0 space-y-0">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 h-[600px]">
