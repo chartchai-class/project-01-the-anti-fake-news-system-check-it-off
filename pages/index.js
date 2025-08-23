@@ -1,5 +1,4 @@
 // Home Page
-// Website to show all news Done, Complteted
 import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import NewsCard from "../components/NewsCard";
@@ -13,17 +12,14 @@ export default function Home() {
   useEffect(() => {
     async function fetchNews() {
       try {
-        const res = await fetch(`/api/news?startRow=0&endRow=25`);
+        // ดึงจาก db.json (อยู่ใน public/db.json)
+        const res = await fetch("/db.json");
         const data = await res.json();
 
-        if (!Array.isArray(data)) {
-          console.error("API returned non-array data:", data);
-          setNewsList([]);
-          setNewsLoaded(true);
-          return;
-        }
+        // ถ้า db.json มีโครงสร้าง { "news": [...] }
+        const newsArray = Array.isArray(data.news) ? data.news : [];
 
-        const updatedNews = updateStats(data);
+        const updatedNews = updateStats(newsArray);
         setNewsList(updatedNews);
         setNewsLoaded(true);
       } catch (err) {
@@ -114,7 +110,7 @@ export default function Home() {
           ))
         ) : (
           <p className="text-gray-500 col-span-full text-center">
-            
+            No news available.
           </p>
         )}
       </div>

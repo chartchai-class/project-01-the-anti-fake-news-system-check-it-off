@@ -1,4 +1,4 @@
-// It is page after clicking on View Details button in NewsCard
+// pages/news/[id].js
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Image from "next/image";
@@ -9,59 +9,71 @@ export default function NewsDetail() {
   const [news, setNews] = useState(null);
 
   const goToVotePage = () => {
-
     router.push(`/vote?id=${news.id}`);
   };
 
   const goToCommentsPage = () => {
     router.push(`/comments?id=${news.id}`);
-  }
+  };
 
   useEffect(() => {
-  if (!id) return;
+    if (!id) return;
 
-  async function fetchNews() {
-    try {
-      const res = await fetch(`/api/news?startRow=0&endRow=25`);
-      const data = await res.json();
-      const item = data.find((n) => n.id === id || n.id === parseInt(id));
+    async function fetchNews() {
+      try {
+        const res = await fetch("/db.json"); // fetch db.json
+        const data = await res.json();
 
-      if (item) {
-        let updatedStats = "Unverified";
-        if (item.upVotes > item.downVotes) updatedStats = "Verified";
-        else if (item.downVotes > item.upVotes) updatedStats = "Fake News";
+        // ดึงข่าวตาม id
+        const item = data.news.find(
+          (n) => n.id === id || n.id === String(id) || n.id === parseInt(id)
+        );
 
-        setNews({
-          ...item,
-          stats: updatedStats,
-        });
+        if (item) {
+          let updatedStats = "Under Review";
+          if (item.upVotes > item.downVotes) updatedStats = "Verified";
+          else if (item.downVotes > item.upVotes) updatedStats = "Fake News";
+
+          const commentCount = data.comments.filter(
+            (c) => c.newsId === item.id || c.newsId === String(item.id)
+          ).length;
+
+          // แก้ path ของ image ให้เป็น absolute path สำหรับ Next.js
+          const imageSrc =
+            item.image?.startsWith("/")
+              ? item.image
+              : item.image
+              ? `/${item.image}`
+              : null;
+
+          setNews({
+            ...item,
+            stats: updatedStats,
+            comments: commentCount,
+            image: imageSrc,
+          });
+        }
+      } catch (err) {
+        console.error("Failed to fetch db.json:", err);
       }
-    } catch (err) {
-      console.error(err);
     }
-  }
 
-  fetchNews();
-}, [id]);
-
+    fetchNews();
+  }, [id]);
 
   if (!news) {
-  return (
-    <div className="flex items-center justify-center h-screen"
-    style={{ fontFamily: "Outfit, sans-serif" }}>
-      <p className="text-gray-500 text-lg animate-pulse">Loading...</p>
-    </div>
-  );
-}
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <p className="text-gray-500 text-lg animate-pulse">Loading...</p>
+      </div>
+    );
+  }
 
   return (
-    <div
-      className="p-8 max-w-4xl mx-auto"
-      style={{ fontFamily: "Outfit, sans-serif" }}
-    >
+    <div className="p-8 max-w-4xl mx-auto">
       <button
         onClick={() => router.back()}
-        className="mb-6 flex items-center px-3 py-1 bg-gray-100 hover:bg-gray-300 rounded shadow "
+        className="mb-6 flex items-center px-3 py-1 bg-gray-100 hover:bg-gray-300 rounded shadow"
       >
         <Image
           src="/icon/Card/Back.png"
@@ -73,7 +85,6 @@ export default function NewsDetail() {
         Back to News List
       </button>
 
-      {/* News Info */}
       <div className="bg-white rounded-lg shadow p-6 space-y-4 border border-gray-200">
         <h1 className="text-3xl font-bold">{news.title}</h1>
 
@@ -98,19 +109,12 @@ export default function NewsDetail() {
             />
             <span className="ml-2"> By {news.author}</span>
           </span>
-
           <span className="text-gray-600">{news.date}</span>
         </div>
 
-        {/* Votes and Comments */}
         <div className="flex flex-wrap items-center gap-4 mt-2">
           <button className="flex items-center gap-1 px-3 py-1 bg-green-50 rounded">
-            <Image
-              src="/icon/Card/Like.png"
-              alt="Like"
-              width={20}
-              height={20}
-            />
+            <Image src="/icon/Card/Like.png" alt="Like" width={20} height={20} />
             {news.upVotes}
           </button>
 
@@ -135,7 +139,6 @@ export default function NewsDetail() {
           </button>
         </div>
 
-        {/* News Image */}
         {news.image && (
           <div className="w-full h-64 relative mb-4">
             <Image
@@ -148,23 +151,24 @@ export default function NewsDetail() {
           </div>
         )}
 
-        {/* Description */}
         <div className="mt-4 text-gray-700 whitespace-pre-line">
           {news.fullDescription || news.description}
         </div>
 
         <div className="h-px bg-gray-300 w-full"></div>
 
-        {/* Optional: Add more buttons like "View Full Comments" */}
-        <div className="mt-6 flex gap-4 " >
-          <button className="w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-          onClick={goToVotePage}
+        <div className="mt-6 flex gap-4">
+          <button
+            className="w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+            onClick={goToVotePage}
           >
             Vote on This News
           </button>
 
-          <button className="w-full px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
-          onClick={goToCommentsPage}>
+          <button
+            className="w-full px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
+            onClick={goToCommentsPage}
+          >
             View More Comments ({news.comments})
           </button>
         </div>
