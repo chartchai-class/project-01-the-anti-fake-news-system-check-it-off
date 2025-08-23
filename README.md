@@ -61,6 +61,6 @@ Open http://localhost:3000 in your browser
 Links
 Localhost: http://localhost:3000
 
-Deployment (Vercel): https://project-01-the-anti-fake-news-syste-pi.vercel.app/ (Failed)
+Deployment (Vercel): https://project-01-the-anti-fake-news-syste-pi.vercel.app/ (Not done yet)
 
 YouTube Demo: https://www.youtube.com/ <!-- replace with your actual video link -->
