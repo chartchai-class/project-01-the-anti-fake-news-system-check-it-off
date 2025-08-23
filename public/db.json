@@ -6,7 +6,7 @@
       "stats": "Verified",
       "description": "The Ministry of Education has announced a new reform aimed at improving digital literacy in schools nationwide.",
       "author": "Jane Smith",
-      "image": "1.png",
+      "image": "/news/images/1.png",
       "date": "2025-08-10",
       "upVotes": 123,
       "downVotes": 45,
@@ -19,7 +19,7 @@
       "stats": "Fake News",
       "description": "Rumors spread online claimed a famous actor purchased the world's first flying car, but no evidence supports the story.",
       "author": "John Doe",
-      "image": "2.png",
+      "image": "/news/images/2.png",
       "date": "2025-08-08",
       "upVotes": 30,
       "downVotes": 93,
@@ -32,7 +32,7 @@
       "stats": "Under Review",
       "description": "A leading tech company is piloting an AI tool that helps doctors analyze patient data, but experts caution further testing is needed.",
       "author": "Emily Johnson",
-      "image": "3.png",
+      "image": "/news/images/3.png",
       "date": "2023-07-28",
       "upVotes": 50,
       "downVotes": 50,
@@ -45,7 +45,7 @@
       "stats": "Verified",
       "description": "Farmers in the central region have reported their largest rice harvest in over a decade due to favorable weather conditions.",
       "author": "Michael Green",
-      "image": "4.png",
+      "image": "/news/images/4.png",
       "date": "2023-07-26",
       "upVotes": 83,
       "downVotes": 20,
@@ -58,7 +58,7 @@
       "stats": "Fake News",
       "description": "Social media posts claim that scientists have found a cure for aging, but experts confirm this is misinformation.",
       "author": "Sarah Lee",
-      "image": "5.png",
+      "image": "/news/images/5.png",
       "date": "2023-07-18",
       "upVotes": 17,
       "downVotes": 71,
@@ -312,5 +312,317 @@
       "comments": 0,
       "fullDescription": "A private aerospace company announced plans to offer commercial space tourism experiences by 2030, targeting civilian passengers and space enthusiasts. The initiative includes suborbital flights, orbital missions, and immersive training for participants. Engineering teams prioritize safety, reliability, and environmental sustainability, while partnerships with aerospace agencies and research institutions support technological development. The announcement has generated excitement, highlighting potential economic growth in the space industry and inspiring STEM education. Public interest and pre-bookings indicate strong demand for future extraterrestrial adventures and private space exploration opportunities."
     }
-  ]
+  ],
+   "comments": [
+    [
+  {
+    "id": 1,
+    "name": "Michael Lee",
+    "status": "up",
+    "comment": "This news is credible because the Ministry of Education’s official website confirmed the digital literacy initiative, and several reputable newspapers reported the same plan.",
+    "imageUrl": "https://img.freepik.com/free-photo/news-background-with-newspaper-and-glasses_23-2148532192.jpg?w=740"
+  },
+  {
+    "id": 1,
+    "name": "Anna Johnson",
+    "status": "up",
+    "comment": "I believe this is true as local school boards have shared announcements about integrating AI and coding lessons, which matches the story.",
+    "imageUrl": ""
+  },
+  {
+    "id": 1,
+    "name": "David Kim",
+    "status": "up",
+    "comment": "Verified by multiple education blogs and social media accounts of teachers discussing the new reform, so this news seems accurate.",
+    "imageUrl": ""
+  },
+  {
+    "id": 2,
+    "name": "Emily White",
+    "status": "down",
+    "comment": "There’s no official confirmation from the actor or the car company, and all sources are just social media rumors.",
+    "imageUrl": ""
+  },
+  {
+    "id": 2,
+    "name": "Robert Chen",
+    "status": "down",
+    "comment": "Flying cars are still in testing phases and require government permits. This story is clearly exaggerated.",
+    "imageUrl": ""
+  },
+  {
+    "id": 2,
+    "name": "Sofia Martinez",
+    "status": "down",
+    "comment": "Multiple fact-check sites have marked this as false, and the actor’s representatives denied the claim.",
+    "imageUrl": ""
+  },
+  {
+    "id": 4,
+    "name": "Sarah Johnson",
+    "status": "up",
+    "comment": "This is wonderful news for the farmers and the community! Sustainable practices and government support truly make a difference. I hope this success inspires other regions to follow similar methods.",
+    "imageUrl": "https://img.freepik.com/free-photo/green-rice-field-sunset_1150-11114.jpg"
+  },
+  {
+    "id": 4,
+    "name": "David Lee",
+    "status": "up",
+    "comment": "A record harvest like this shows how innovation and tradition can work together. Congratulations to all the hardworking farmers!",
+    "imageUrl": "https://img.freepik.com/free-photo/farmer-harvesting-rice-field_1150-10728.jpg"
+  },
+  {
+    "id": 4,
+    "name": "James Miller",
+    "status": "up",
+    "comment": "It’s inspiring to see how good weather, technology, and proper management can lead to such positive outcomes. Hopefully, soil and water care will remain a top priority.",
+    "imageUrl": "https://img.freepik.com/free-photo/closeup-shot-green-rice-plants-field_181624-25037.jpg"
+  },
+  {
+    "id": 5,
+    "name": "Mark Thompson",
+    "status": "up",
+    "comment": "People should always double-check the facts before believing such extraordinary claims. Aging is a natural process and there’s no miracle cure yet.",
+    "imageUrl": ""
+  },
+  {
+    "id": 5,
+    "name": "Olivia Harris",
+    "status": "up",
+    "comment": "This is a clear example of why we must be careful with online news. Fake science stories can create false hope and confusion.",
+    "imageUrl": ""
+  },
+  {
+    "id": 5,
+    "name": "Daniel Scott",
+    "status": "down",
+    "comment": "Research on aging is fascinating, but no one has discovered a cure. We need patience and real science, not viral hoaxes.",
+    "imageUrl": "https://img.freepik.com/free-photo/dna-double-helix-structure_1150-18012.jpg"
+  },
+  {
+    "id": 6,
+    "name": "Jessica Brown",
+    "status": "up",
+    "comment": "This is fantastic! Green spaces make cities healthier and more livable. I can’t wait to see the new parks open.",
+    "imageUrl": ""
+  },
+  {
+    "id": 6,
+    "name": "Robert Wilson",
+    "status": "up",
+    "comment": "A great investment for the community. Parks provide not only clean air but also safe places for families to gather.",
+    "imageUrl": ""
+  },
+  {
+    "id": 6,
+    "name": "Hannah Moore",
+    "status": "up",
+    "comment": "More green spaces mean better mental health for residents. Nature is essential for city life balance.",
+    "imageUrl": ""
+  },
+  {
+    "id": 7,
+    "name": "Anthony Reed",
+    "status": "down",
+    "comment": "It’s amazing how quickly conspiracy theories spread online. No evidence, just imagination. People should trust marine science, not rumors.",
+    "imageUrl": "https://img.freepik.com/free-photo/ocean-waves-blue-sea_53876-142087.jpg"
+  },
+  {
+    "id": 7,
+    "name": "Laura Bennett",
+    "status": "down",
+    "comment": "The ocean already has so much undiscovered beauty—coral reefs, unique fish, deep-sea creatures. That’s more exciting than fake alien news.",
+    "imageUrl": ""
+  },
+  {
+    "id": 7,
+    "name": "Christopher Young",
+    "status": "down",
+    "comment": "Stories like this remind us why critical thinking is so important. Let’s admire real science instead of falling for clickbait.",
+    "imageUrl": ""
+  },
+  {
+    "id": 8,
+    "name": "Linda Parker",
+    "status": "up",
+    "comment": "This breakthrough is great news for clean energy. Affordable solar panels will make renewable power more accessible to everyone.",
+    "imageUrl": ""
+  },
+  {
+    "id": 8,
+    "name": "Thomas Rivera",
+    "status": "up",
+    "comment": "Universities continue to push innovation forward. This new solar tech could reduce costs and help fight climate change.",
+    "imageUrl": "https://img.freepik.com/free-photo/solar-panel-close-up_1150-11225.jpg"
+  },
+  {
+    "id": 9,
+    "name": "Chloe Anderson",
+    "status": "up",
+    "comment": "I’m so excited! A surprise album release is always the best gift for fans.",
+    "imageUrl": "https://img.freepik.com/free-photo/music-stage-concert_1150-12415.jpg"
+  },
+  {
+    "id": 9,
+    "name": "Jason Cooper",
+    "status": "up",
+    "comment": "Can’t wait to listen! This is the kind of news that makes everyone’s day brighter.",
+    "imageUrl": ""
+  },
+  {
+    "id": 10,
+    "name": "Amanda Wright",
+    "status": "down",
+    "comment": "Coffee has benefits, but preventing all diseases is impossible. This headline is misleading.",
+    "imageUrl": ""
+  },
+  {
+    "id": 10,
+    "name": "George Bell",
+    "status": "down",
+    "comment": "Be careful with such exaggerated claims. Always check medical research before believing health news.",
+    "imageUrl": ""
+  },
+  {
+    "id": 11,
+    "name": "Natalie Brooks",
+    "status": "up",
+    "comment": "This is an amazing contribution to history and culture. I’d love to visit the museum and see the artifacts myself.",
+    "imageUrl": ""
+  },
+  {
+    "id": 11,
+    "name": "Henry Adams",
+    "status": "up",
+    "comment": "Preserving history is so important. Kudos to the museum for sharing these treasures with the public.",
+    "imageUrl": ""
+  },
+  {
+    "id": 12,
+    "name": "Stephanie Morgan",
+    "status": "down",
+    "comment": "Time travel stories are entertaining but not real. Science hasn’t proven anything close to this.",
+    "imageUrl": "https://img.freepik.com/free-photo/abstract-clock_1150-12987.jpg"
+  },
+  {
+    "id": 12,
+    "name": "Brian Foster",
+    "status": "down",
+    "comment": "Extraordinary claims like this need evidence, not just a man’s story. Clearly fake.",
+    "imageUrl": "https://img.freepik.com/free-photo/futuristic-city_1150-12777.jpg"
+  },
+  {
+    "id": 14,
+    "name": "Olivia Turner",
+    "status": "up",
+    "comment": "This is a big step toward renewable energy. Offshore wind power is the future!"
+  },
+  {
+    "id": 14,
+    "name": "Daniel Hughes",
+    "status": "up",
+    "comment": "Clean energy on this scale is inspiring. Great news for the planet and future generations."
+  },
+  {
+    "id": 16,
+    "name": "Karen Mitchell",
+    "status": "up",
+    "comment": "Free Wi-Fi will make life easier for students and workers. Great step toward digital inclusion!",
+    "imageUrl": "https://img.freepik.com/free-photo/free-wifi-symbol_1150-11125.jpg"
+  },
+  {
+    "id": 16,
+    "name": "Andrew Collins",
+    "status": "up",
+    "comment": "Excellent initiative! This will help connect more people and boost opportunities for learning and business."
+  },
+  {
+    "id": 17,
+    "name": "Melissa Carter",
+    "status": "down",
+    "comment": "Without photos or scientific evidence, this is just another internet myth. Deserts have animals, but no “mystery creatures.”"
+  },
+  {
+    "id": 17,
+    "name": "Joshua Allen",
+    "status": "down",
+    "comment": "Sensational stories like this spread too easily. Let’s rely on biology, not rumors."
+  },
+  {
+    "id": 18,
+    "name": "Victoria Hall",
+    "status": "up",
+    "comment": "Fantastic news! High-speed rail will reduce travel time and cut down emissions. 🚄"
+  },
+  {
+    "id": 18,
+    "name": "Benjamin Price",
+    "status": "up",
+    "comment": "This project will boost the economy and improve transportation efficiency. Can’t wait to ride it!",
+    "imageUrl": "https://img.freepik.com/free-photo/modern-train-station_1150-11398.jpg"
+  },
+  {
+    "id": 19,
+    "name": "Rachel Foster",
+    "status": "down",
+    "comment": "Lemon water is healthy, but it doesn’t make people live to 150. Please don’t fall for such fake claims. 🍋"
+  },
+  {
+    "id": 19,
+    "name": "Patrick Young",
+    "status": "down",
+    "comment": "This is misleading health news. Only balanced lifestyle and medicine can improve longevity, not magic drinks"
+  },
+  {
+    "id": 20,
+    "name": "Jennifer Scott",
+    "status": "up",
+    "comment": "Impressive! It shows how much people trust this brand’s innovation and quality. 📱"
+  },
+  {
+    "id": 20,
+    "name": "Matthew Rogers",
+    "status": "up",
+    "comment": "Breaking sales records means the product really resonates with users. Congrats to the tech team!"
+  },
+  {
+    "id": 21,
+    "name": "Sophia Gray",
+    "status": "up",
+    "comment": "So adorable! The arrival of panda cubs is great for conservation and education.",
+    "imageUrl": "https://img.freepik.com/free-photo/baby-panda_1150-11987.jpg"
+  },
+  {
+    "id": 21,
+    "name": "William Baker",
+    "status": "up",
+    "comment": "Rare pandas bring joy to the community and raise awareness about protecting endangered species."
+  },
+  {
+    "id": 23,
+    "name": "Emily Ross",
+    "status": "down",
+    "comment": "Cancer research is ongoing, but no sudden miracle “cure” exists. This story is misleading and dangerous."
+  },
+  {
+    "id": 23,
+    "name": "Charles Green",
+    "status": "down",
+    "comment": "False claims about cancer cures give false hope. Please trust only peer-reviewed medical research."
+  },
+  {
+    "id": 24,
+    "name": "Megan Phillips",
+    "status": "up",
+    "comment": "Exciting! Space tourism will inspire a new generation of explorers."
+  },
+  {
+    "id": 24,
+    "name": "Jonathan Edwards",
+    "status": "up",
+    "comment": "It’s amazing how fast technology is advancing. 2030 doesn’t seem so far away anymore!"
+  }
+]
+
+   ]
 }
