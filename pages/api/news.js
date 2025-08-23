@@ -18,9 +18,8 @@ export default async function handler(req, res) {
   const client = await auth.getClient();
   const sheets = google.sheets({ version: "v4", auth: client });
 
-  // GET method
+  // ================= GET =================
   if (req.method === "GET") {
-    // ดึงข่าวจาก Sheet1
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId,
       range: `${sheetName}!A:K`,
@@ -29,33 +28,34 @@ export default async function handler(req, res) {
     if (!rows.length) return res.status(200).json([]);
 
     // ดึงคอมเมนต์จาก Sheet2
-    const COMMENTS_SHEET = "Sheet2"; // เปลี่ยนเป็นชื่อ Sheet2 ของคุณ
+    const COMMENTS_SHEET = "Sheet2";
     const commentsRes = await sheets.spreadsheets.values.get({
       spreadsheetId,
-      range: `${COMMENTS_SHEET}!A:E`, // A: newsId, B: name, ...
+      range: `${COMMENTS_SHEET}!A:E`,
     });
     const commentsRows = commentsRes.data.values || [];
 
-    const data = rows.slice(1).map((row) => {
-      const id = row[0] || "";
+    const data = rows
+      .slice(1)
+      .filter(row => row[0] && row[1]) // กรอง row ที่มี id และ title
+      .map((row) => {
+        const id = row[0];
+        const commentCount = commentsRows.filter((c) => c[0] === id).length;
 
-    
-      const commentCount = commentsRows.filter((c) => c[0] === id).length;
-
-      return {
-        id: String(id),
-        title: row[1] || "",
-        stats: row[2] || "",
-        description: row[3] || "",
-        fullDescription: row[10] || "",
-        author: row[4] || "",
-        image: row[5] ? `/news/images/${row[5]}` : "",
-        date: row[6] || "",
-        upVotes: parseInt(row[7] || 0),
-        downVotes: parseInt(row[8] || 0),
-        comments: commentCount,
-      };
-    });
+        return {
+          id: String(id),
+          title: row[1],
+          stats: row[2] || "",
+          description: row[3] || "",
+          fullDescription: row[10] || "",
+          author: row[4] || "",
+          image: row[5] ? `/news/images/${row[5]}` : "",
+          date: row[6] || "",
+          upVotes: parseInt(row[7] || 0),
+          downVotes: parseInt(row[8] || 0),
+          comments: commentCount,
+        };
+      });
 
     return res.status(200).json(data);
   }
@@ -104,33 +104,6 @@ export default async function handler(req, res) {
 
   // ================= PUT =================
   if (req.method === "PUT") {
-    const { rowIndex, type } = req.body;
-
-    const rowResponse = await sheets.spreadsheets.values.get({
-      spreadsheetId,
-      range: `${sheetName}!A:K`,
-    });
-
-    const row = rowResponse.data.values[rowIndex];
-    if (!row) return res.status(404).json({ message: "Row not found" });
-
-    let upVotes = parseInt(row[7] || 0);
-    let downVotes = parseInt(row[8] || 0);
-
-    if (type === "up") upVotes += 1;
-    if (type === "down") downVotes += 1;
-
-    await sheets.spreadsheets.values.update({
-      spreadsheetId,
-      range: `${sheetName}!H${rowIndex + 1}:I${rowIndex + 1}`,
-      valueInputOption: "RAW",
-      resource: { values: [[upVotes, downVotes]] },
-    });
-
-    return res.status(200).json({ message: "Voted successfully" });
-  }
-
-  if (req.method === "PUT") {
     const { id, type } = req.body;
 
     const rowResponse = await sheets.spreadsheets.values.get({
@@ -141,9 +114,7 @@ export default async function handler(req, res) {
     const rows = rowResponse.data.values || [];
     const headerOffset = 1;
 
-    const rowIndex = rows.findIndex(
-      (r, i) => i >= headerOffset && r[0] === String(id)
-    );
+    const rowIndex = rows.findIndex((r, i) => i >= headerOffset && r[0] === String(id));
     if (rowIndex === -1) {
       return res.status(404).json({ message: "News item not found" });
     }
@@ -164,9 +135,7 @@ export default async function handler(req, res) {
       resource: { values: [[upVotes, downVotes]] },
     });
 
-    return res
-      .status(200)
-      .json({ message: "Voted successfully", upVotes, downVotes });
+    return res.status(200).json({ message: "Voted successfully", upVotes, downVotes });
   }
 
   res.status(405).json({ message: "Method not allowed" });
