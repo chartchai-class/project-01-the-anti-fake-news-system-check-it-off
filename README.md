@@ -12,7 +12,7 @@ This web application allows users to:
 - Classify news as real or fake based on user votes. If upvotes exceed downvotes, the news is considered real. If downvotes exceed upvotes, the news is likely fake.
 - Display results in real-time on the website, showing updated news classifications, vote counts, and user comments instantly as they are submitted, allowing visitors to see the latest trends and feedback without needing to refresh the page.
 
-## I chose to use Next.js for this project because I was initially confused between Nuxt.js and Next.js. As a result, I decided to build this project with Next.js. I sincerely ask for your understanding and kindness, as I have worked on this project entirely by myself and take full responsibility for it. I have put in my best effort and tried very hard to complete it to the best of my ability. I humbly hope for your consideration and support. Thank you very much for your time and guidance.
+    ## I chose to use Next.js for this project because I was initially confused between Nuxt.js and Next.js. As a result, I decided to build this project with Next.js. I sincerely ask for your understanding and kindness, as I have worked on this project entirely by myself and take full responsibility for it. I have put in my best effort and tried very hard to complete it to the best of my ability. I humbly hope for your consideration and support. Thank you very much for your time and guidance.
 
 The project is built with **Next.js** and uses the following tools:
 
