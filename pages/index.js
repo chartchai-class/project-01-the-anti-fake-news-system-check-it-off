@@ -15,11 +15,21 @@ export default function Home() {
         const res = await fetch(`/api/news?startRow=0&endRow=25`);
         const data = await res.json();
 
+        // ตรวจสอบว่า data เป็น array หรือไม่
+        if (!Array.isArray(data)) {
+          console.error("API returned non-array data:", data);
+          setNewsList([]);
+          setNewsLoaded(true);
+          return;
+        }
+
         const updatedNews = updateStats(data);
         setNewsList(updatedNews);
         setNewsLoaded(true);
       } catch (err) {
-        console.error(err);
+        console.error("Failed to fetch news:", err);
+        setNewsList([]);
+        setNewsLoaded(true);
       }
     }
     fetchNews();
@@ -43,12 +53,14 @@ export default function Home() {
       ? newsList
       : newsList.filter((n) => n.stats === filter);
 
+  const validNews = Array.isArray(filteredNews)
+    ? filteredNews.filter((news) => news.id && news.title)
+    : [];
+
   const loadMore = () => {
     if (itemsPerPage === 6) setItemsPerPage(12);
     else if (itemsPerPage === 12) setItemsPerPage(24);
   };
-
-  const validNews = filteredNews.filter((news) => news.id && news.title);
 
   return (
     <div className="p-8">
@@ -96,9 +108,15 @@ export default function Home() {
 
       {/* News Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
-        {validNews.slice(0, itemsPerPage).map((newsItem) => (
-          <NewsCard key={newsItem.id} news={newsItem} />
-        ))}
+        {validNews.length > 0 ? (
+          validNews.slice(0, itemsPerPage).map((newsItem) => (
+            <NewsCard key={newsItem.id} news={newsItem} />
+          ))
+        ) : (
+          <p className="text-gray-500 col-span-full text-center">
+            No news to display.
+          </p>
+        )}
       </div>
 
       {newsLoaded && itemsPerPage < filteredNews.length && (
