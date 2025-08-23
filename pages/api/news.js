@@ -1,8 +1,15 @@
 import { google } from "googleapis";
 import path from "path";
 
+const credentials = process.env.GOOGLE_SERVICE_ACCOUNT;
+if (!credentials) {
+  return res
+    .status(500)
+    .json({ message: "Google Service Account credentials are missing." });
+}
+
 const auth = new google.auth.GoogleAuth({
-  keyFile: path.join(process.cwd(), "secret/newsdatabaseproject-168367164553.json"),
+  credentials: JSON.parse(credentials),
   scopes: ["https://www.googleapis.com/auth/spreadsheets"],
 });
 
