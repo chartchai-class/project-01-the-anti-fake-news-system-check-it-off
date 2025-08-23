@@ -13,55 +13,52 @@ const auth = new google.auth.GoogleAuth({
 const spreadsheetId = "1xXd_djAF1jp7c5jrY-mzAwVYxSN9wbl_0RTpKKvH0AA";
 const sheetName = "Sheet1";
 
-
 export default async function handler(req, res) {
-  
   res.setHeader("Cache-Control", "no-store");
   const client = await auth.getClient();
   const sheets = google.sheets({ version: "v4", auth: client });
 
   // GET method
-if (req.method === "GET") {
-  // ดึงข่าวจาก Sheet1
-  const response = await sheets.spreadsheets.values.get({
-    spreadsheetId,
-    range: `${sheetName}!A:K`,
-  });
-  const rows = response.data.values || [];
-  if (!rows.length) return res.status(200).json([]);
+  if (req.method === "GET") {
+    // ดึงข่าวจาก Sheet1
+    const response = await sheets.spreadsheets.values.get({
+      spreadsheetId,
+      range: `${sheetName}!A:K`,
+    });
+    const rows = response.data.values || [];
+    if (!rows.length) return res.status(200).json([]);
 
-  // ดึงคอมเมนต์จาก Sheet2
-  const COMMENTS_SHEET = "Sheet2"; // เปลี่ยนเป็นชื่อ Sheet2 ของคุณ
-  const commentsRes = await sheets.spreadsheets.values.get({
-    spreadsheetId,
-    range: `${COMMENTS_SHEET}!A:E`, // A: newsId, B: name, ...
-  });
-  const commentsRows = commentsRes.data.values || [];
+    // ดึงคอมเมนต์จาก Sheet2
+    const COMMENTS_SHEET = "Sheet2"; // เปลี่ยนเป็นชื่อ Sheet2 ของคุณ
+    const commentsRes = await sheets.spreadsheets.values.get({
+      spreadsheetId,
+      range: `${COMMENTS_SHEET}!A:E`, // A: newsId, B: name, ...
+    });
+    const commentsRows = commentsRes.data.values || [];
 
-  const data = rows.slice(1).map((row) => {
-    const id = row[0] || "";
+    const data = rows.slice(1).map((row) => {
+      const id = row[0] || "";
 
-    // นับจำนวนคอมเมนต์ที่ตรงกับ newsId
-    const commentCount = commentsRows.filter((c) => c[0] === id).length;
+    
+      const commentCount = commentsRows.filter((c) => c[0] === id).length;
 
-    return {
-      id,
-      title: row[1] || "",
-      stats: row[2] || "",
-      description: row[3] || "",
-      fullDescription: row[10] || "",
-      author: row[4] || "",
-      image: row[5] ? `/news/images/${row[5]}` : "",
-      date: row[6] || "",
-      upVotes: parseInt(row[7] || 0),
-      downVotes: parseInt(row[8] || 0),
-      comments: commentCount, // ✅ ใช้จำนวนจาก Sheet2
-    };
-  });
+      return {
+        id: String(id),
+        title: row[1] || "",
+        stats: row[2] || "",
+        description: row[3] || "",
+        fullDescription: row[10] || "",
+        author: row[4] || "",
+        image: row[5] ? `/news/images/${row[5]}` : "",
+        date: row[6] || "",
+        upVotes: parseInt(row[7] || 0),
+        downVotes: parseInt(row[8] || 0),
+        comments: commentCount,
+      };
+    });
 
-  return res.status(200).json(data);
-}
-
+    return res.status(200).json(data);
+  }
 
   // ================= POST =================
   if (req.method === "POST") {
@@ -134,40 +131,43 @@ if (req.method === "GET") {
   }
 
   if (req.method === "PUT") {
-  const { id, type } = req.body;
+    const { id, type } = req.body;
 
-  const rowResponse = await sheets.spreadsheets.values.get({
-    spreadsheetId,
-    range: `${sheetName}!A:K`,
-  });
+    const rowResponse = await sheets.spreadsheets.values.get({
+      spreadsheetId,
+      range: `${sheetName}!A:K`,
+    });
 
-  const rows = rowResponse.data.values || [];
-  const headerOffset = 1;
+    const rows = rowResponse.data.values || [];
+    const headerOffset = 1;
 
-  const rowIndex = rows.findIndex((r, i) => i >= headerOffset && r[0] === String(id));
-  if (rowIndex === -1) {
-    return res.status(404).json({ message: "News item not found" });
+    const rowIndex = rows.findIndex(
+      (r, i) => i >= headerOffset && r[0] === String(id)
+    );
+    if (rowIndex === -1) {
+      return res.status(404).json({ message: "News item not found" });
+    }
+
+    const row = rows[rowIndex];
+    let upVotes = parseInt(row[7] || 0);
+    let downVotes = parseInt(row[8] || 0);
+
+    if (type === "up") upVotes += 1;
+    if (type === "down") downVotes += 1;
+
+    const sheetRow = rowIndex + 1;
+
+    await sheets.spreadsheets.values.update({
+      spreadsheetId,
+      range: `${sheetName}!H${sheetRow}:I${sheetRow}`,
+      valueInputOption: "RAW",
+      resource: { values: [[upVotes, downVotes]] },
+    });
+
+    return res
+      .status(200)
+      .json({ message: "Voted successfully", upVotes, downVotes });
   }
-
-  const row = rows[rowIndex];
-  let upVotes = parseInt(row[7] || 0);
-  let downVotes = parseInt(row[8] || 0);
-
-  if (type === "up") upVotes += 1;
-  if (type === "down") downVotes += 1;
-
-  const sheetRow = rowIndex + 1;
-
-  await sheets.spreadsheets.values.update({
-    spreadsheetId,
-    range: `${sheetName}!H${sheetRow}:I${sheetRow}`,
-    valueInputOption: "RAW",
-    resource: { values: [[upVotes, downVotes]] },
-  });
-
-  return res.status(200).json({ message: "Voted successfully", upVotes, downVotes });
-}
-
 
   res.status(405).json({ message: "Method not allowed" });
 }
