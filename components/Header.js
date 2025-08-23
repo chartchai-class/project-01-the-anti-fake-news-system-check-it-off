@@ -4,46 +4,70 @@ import { useEffect, useState } from "react";
 
 export default function Header() {
   const [stats, setStats] = useState([
-  { label: "Total News", value: 0, icon: "/icon/Total-News.png", color: "text-blue-600" },
-  { label: "Verified", value: 0, icon: "/icon/Verified.png", color: "text-green-500" },
-  { label: "Fake News", value: 0, icon: "/icon/Fake-News.png", color: "text-red-500" },
-  { label: "Under Review", value: 0, icon: "/icon/Under-Review.png", color: "text-yellow-500" },
+    {
+      label: "Total News",
+      value: 0,
+      icon: "/icon/Total-News.png",
+      color: "text-blue-600",
+    },
+    {
+      label: "Verified",
+      value: 0,
+      icon: "/icon/Verified.png",
+      color: "text-green-500",
+    },
+    {
+      label: "Fake News",
+      value: 0,
+      icon: "/icon/Fake-News.png",
+      color: "text-red-500",
+    },
+    {
+      label: "Under Review",
+      value: 0,
+      icon: "/icon/Under-Review.png",
+      color: "text-yellow-500",
+    },
   ]);
-             
-  useEffect(() => {
-  fetch("/api/news?startRow=0&endRow=25")
-    .then((response) => response.json())
-    .then((news) => { 
-      setStats([
-        { 
-          label: "Total News", 
-          value: Math.max(...news.map(n => n.id)), 
-          icon: "/icon/Total-News.png", 
-          color: "text-blue-600" 
-        },
-        { 
-          label: "Verified", 
-          value: news.filter(n => n.stats === "Verified").length, 
-          icon: "/icon/Verified.png", 
-          color: "text-green-500" 
-        },
-        { 
-          label: "Fake News", 
-          value: news.filter(n => n.stats === "Fake News").length, 
-          icon: "/icon/Fake-News.png", 
-          color: "text-red-500" 
-        },
-        { 
-          label: "Under Review", 
-          value: news.filter(n => n.stats === "Under Review").length, 
-          icon: "/icon/Under-Review.png", 
-          color: "text-yellow-500" 
-        },
-      ]);
-    })
-    .catch((err) => console.error(err));
-}, []);
 
+  useEffect(() => {
+    fetch("/api/news?startRow=0&endRow=25")
+      .then((response) => response.json())
+      .then((news) => {
+        // ตรวจสอบก่อนว่า news เป็น array หรือไม่
+        const newsArray = Array.isArray(news) ? news : [];
+
+        setStats([
+          {
+            label: "Total News",
+            value: newsArray.length
+              ? Math.max(...newsArray.map((n) => Number(n.id) || 0))
+              : 0,
+            icon: "/icon/Total-News.png",
+            color: "text-blue-600",
+          },
+          {
+            label: "Verified",
+            value: newsArray.filter((n) => n.stats === "Verified").length,
+            icon: "/icon/Verified.png",
+            color: "text-green-500",
+          },
+          {
+            label: "Fake News",
+            value: newsArray.filter((n) => n.stats === "Fake News").length,
+            icon: "/icon/Fake-News.png",
+            color: "text-red-500",
+          },
+          {
+            label: "Under Review",
+            value: newsArray.filter((n) => n.stats === "Under Review").length,
+            icon: "/icon/Under-Review.png",
+            color: "text-yellow-500",
+          },
+        ]);
+      })
+      .catch((err) => console.error(err));
+  }, []);
 
   return (
     <header className="text-center mb-8 p-6 rounded-lg shadow-md bg-gradient-to-r from-blue-200 via-blue-100 to-green-100">
@@ -56,7 +80,7 @@ export default function Header() {
 
       <h1
         className="text-6xl font-bold mt-4 text-green-400 "
-        style={{fontFamily: "Outfit, sans-serif" }}
+        style={{ fontFamily: "Outfit, sans-serif" }}
       >
         Social Anti-Fake News System
       </h1>
@@ -80,13 +104,14 @@ export default function Header() {
               <div className="mb-2">
                 <Image src={s.icon} alt={s.label} width={48} height={48} />
               </div>
-               <div className={`text-4xl font-semibold ${s.color}`}>{s.value}</div>
+              <div className={`text-4xl font-semibold ${s.color}`}>
+                {s.value}
+              </div>
               <div className="text-gray-600">{s.label}</div>
             </div>
           ))}
         </div>
       </div>
-
     </header>
   );
 }
