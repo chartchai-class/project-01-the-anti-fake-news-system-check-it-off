@@ -36,6 +36,7 @@ The project is built with **Next.js** and uses the following tools:
 ## Getting Started (Local)
 
 1. Download or clone this project
+
 2. Install dependencies:
 
 ```bash
@@ -45,11 +46,20 @@ yarn install
 # or
 pnpm install
 
-```bash
+Start the development server:
+
 npm run dev
 # or
 yarn dev
 # or
 pnpm dev
+```
 
+Open http://localhost:3000 in your browser
 
+Links
+Localhost: http://localhost:3000
+
+Deployment (Vercel): https://project-01-the-anti-fake-news-syste-pi.vercel.app/
+
+YouTube Demo: https://www.youtube.com/ <!-- replace with your actual video link -->
