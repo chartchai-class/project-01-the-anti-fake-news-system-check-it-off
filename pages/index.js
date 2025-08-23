@@ -1,4 +1,4 @@
-// Home Page
+// pages/index.js
 import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import NewsCard from "../components/NewsCard";
@@ -12,10 +12,25 @@ export default function Home() {
   useEffect(() => {
     async function fetchNews() {
       try {
-        const res = await fetch(`/api/news?startRow=0&endRow=25`);
+        // เรียก API Route ของ Google Sheets
+        const res = await fetch("/api/sheets");
         const data = await res.json();
 
-        const updatedNews = updateStats(data);
+        // สมมติว่า data เป็น array ของ rows จาก Sheet
+        // แปลงเป็น object ให้เหมือน news
+        const formattedNews = data.map((row, index) => ({
+          id: index + 1,
+          title: row[0] || "No Title",
+          description: row[1] || "No Description",
+          stats: row[2] || "Under Review",
+          upVotes: parseInt(row[3]) || 0,
+          downVotes: parseInt(row[4]) || 0,
+          author: row[5] || "Anonymous",
+          date: row[6] || "Unknown",
+          image: row[7] || "/placeholder.png",
+        }));
+
+        const updatedNews = updateStats(formattedNews);
         setNewsList(updatedNews);
         setNewsLoaded(true);
       } catch (err) {
