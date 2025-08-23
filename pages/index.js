@@ -12,9 +12,9 @@ export default function Home() {
   useEffect(() => {
     async function fetchNews() {
       try {
-        // เรียก API Route ของ Google Sheets
         const res = await fetch("/api/sheets");
         const data = await res.json();
+          console.log(data);
 
         // สมมติว่า data เป็น array ของ rows จาก Sheet
         // แปลงเป็น object ให้เหมือน news
