@@ -114,7 +114,7 @@ export default function Home() {
           ))
         ) : (
           <p className="text-gray-500 col-span-full text-center">
-            No news to display.
+            
           </p>
         )}
       </div>
