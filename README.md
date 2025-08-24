@@ -1,8 +1,9 @@
 # Hello! I'm Nawapon Somruang 662115027
 
 Welcome to the **Check it off Anti-Fake News System** project. This project is designed to help identify and manage fake news using modern web technologies.
-Deployment (Vercel): https://project-01-the-anti-fake-news-system-check-it-cx0nj554q.vercel.app/
+
 ---
+Deployment (Vercel): https://project-01-the-anti-fake-news-system-check-it-cx0nj554q.vercel.app/
 
 ## About the Project
 
