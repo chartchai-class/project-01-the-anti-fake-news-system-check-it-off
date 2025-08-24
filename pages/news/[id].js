@@ -21,7 +21,7 @@ export default function NewsDetail() {
 
     async function fetchNews() {
       try {
-        const res = await fetch("/db.json"); // fetch db.json
+        const res = await fetch("/db.json");
         const data = await res.json();
 
         // ดึงข่าวตาม id
@@ -38,7 +38,6 @@ export default function NewsDetail() {
             (c) => c.newsId === item.id || c.newsId === String(item.id)
           ).length;
 
-          // แก้ path ของ image ให้เป็น absolute path สำหรับ Next.js
           const imageSrc =
             item.image?.startsWith("/")
               ? item.image
@@ -70,7 +69,9 @@ export default function NewsDetail() {
   }
 
   return (
-    <div className="p-8 max-w-4xl mx-auto">
+    <div className="p-8 max-w-4xl mx-auto"
+     style={{fontFamily: "Outfit, sans-serif" }}
+    >
       <button
         onClick={() => router.back()}
         className="mb-6 flex items-center px-3 py-1 bg-gray-100 hover:bg-gray-300 rounded shadow"

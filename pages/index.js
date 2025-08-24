@@ -12,11 +12,10 @@ export default function Home() {
   useEffect(() => {
     async function fetchNews() {
       try {
-        // ดึงจาก db.json (อยู่ใน public/db.json)
+
         const res = await fetch("/db.json");
         const data = await res.json();
 
-        // ถ้า db.json มีโครงสร้าง { "news": [...] }
         const newsArray = Array.isArray(data.news) ? data.news : [];
 
         const updatedNews = updateStats(newsArray);
