@@ -67,3 +67,5 @@ Localhost: http://localhost:3000
 Deployment (Vercel): https://project-01-the-anti-fake-news-system-check-it-cx0nj554q.vercel.app/
 
 YouTube Demo: https://www.youtube.com/ <!-- replace with your actual video link -->
+
+Google Sheet:https://docs.google.com/spreadsheets/d/1xXd_djAF1jp7c5jrY-mzAwVYxSN9wbl_0RTpKKvH0AA/edit?usp=sharing
