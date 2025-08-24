@@ -118,7 +118,7 @@ export default function CommentsPage() {
             <div className="flex flex-wrap gap-6 text-gray-700 mt-4">
               <div className="flex items-center gap-2">
                 <Image
-                  src="/icon/Card/like.png"
+                  src="/icon/Card/Like.png"
                   alt="Like"
                   width={25}
                   height={25}
@@ -129,7 +129,7 @@ export default function CommentsPage() {
 
               <div className="flex items-center gap-2">
                 <Image
-                  src="/icon/Card/DisLike.png"
+                  src="/icon/Card/Dislike.png"
                   alt="Dislike"
                   width={25}
                   height={25}

@@ -76,7 +76,7 @@ export default function NewsCard({ news: propNews, id }) {
 
           <span className="flex items-center gap-1 text-red-600">
             <Image
-              src="/icon/Card/dislike.png"
+              src="/icon/Card/Dislike.png"
               alt="disLike Icon"
               width={20}
               height={20}
@@ -86,7 +86,7 @@ export default function NewsCard({ news: propNews, id }) {
 
           <span className="flex items-center gap-1 text-gray-600">
             <Image
-              src="/icon/Card/comment.png"
+              src="/icon/Card/Comment.png"
               alt="comment Icon"
               width={20}
               height={20}
