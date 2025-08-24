@@ -1,13 +1,4 @@
 import { google } from "googleapis";
-import path from "path";
-
-const auth = new google.auth.GoogleAuth({
-  keyFile: path.join(
-    process.cwd(),
-    "secret/newsdatabaseproject-168367164553.json"
-  ),
-  scopes: ["https://www.googleapis.com/auth/spreadsheets"],
-});
 
 const spreadsheetId = "1xXd_djAF1jp7c5jrY-mzAwVYxSN9wbl_0RTpKKvH0AA";
 const sheetNews = "Sheet1";
@@ -20,12 +11,19 @@ export default async function handler(req, res) {
 
   try {
     const { id, type, name, comment, imageUrl } = req.body;
+
+    // ใช้ credentials จาก Environment Variable แทน keyFile
+    const auth = new google.auth.GoogleAuth({
+      credentials: JSON.parse(process.env.GOOGLE_CREDENTIALS),
+      scopes: ["https://www.googleapis.com/auth/spreadsheets"],
+    });
+
     const sheets = google.sheets({
       version: "v4",
       auth: await auth.getClient(),
     });
 
-    // 1️⃣ อัปเดต vote ใน Sheet1
+    // อ่านข่าว
     const readNews = await sheets.spreadsheets.values.get({
       spreadsheetId,
       range: `${sheetNews}!A:I`,
@@ -59,21 +57,8 @@ export default async function handler(req, res) {
       resource: { values: [[updatedStatus]] },
     });
 
-    const readComments = await sheets.spreadsheets.values.get({
-      spreadsheetId,
-      range: `${sheetComments}!A:E`,
-    });
-
-    const commentRows = readComments.data.values || [];
-
-    const newComment = [
-      id,
-      name,
-      type,
-      comment || "",
-      imageUrl || "",
-    ];
-
+    // เพิ่ม comment
+    const newComment = [id, name, type, comment || "", imageUrl || ""];
     await sheets.spreadsheets.values.append({
       spreadsheetId,
       range: `${sheetComments}!A:E`,
