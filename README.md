@@ -63,7 +63,6 @@ Open http://localhost:3000 in your browser
 Links
 Localhost: http://localhost:3000
 
-Deployment (Vercel): [(https://project-01-the-anti-fake-news-system-check-it-cx0nj554q.vercel.app/)]
-Deployment (Vercel):
+Deployment (Vercel): https://project-01-the-anti-fake-news-system-check-it-cx0nj554q.vercel.app/
 
 YouTube Demo: https://www.youtube.com/ <!-- replace with your actual video link -->
