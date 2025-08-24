@@ -7,6 +7,7 @@ export default function NewsDetail() {
   const router = useRouter();
   const { id } = router.query;
   const [news, setNews] = useState(null);
+  const [commentCount, setCommentCount] = useState(0);
 
   const goToVotePage = () => {
     router.push(`/vote?id=${news.id}`);
@@ -59,6 +60,23 @@ export default function NewsDetail() {
 
     fetchNews();
   }, [id]);
+
+    // Fetch comment count from Google Sheet
+  useEffect(() => {
+    if (!news) return;
+
+    async function fetchCommentCount() {
+      try {
+        const res = await fetch(`/api/commentCount?newsId=${news.id}`);
+        const data = await res.json();
+        setCommentCount(data.count || 0);
+      } catch (err) {
+        console.error("Failed to fetch comment count:", err);
+      }
+    }
+
+    fetchCommentCount();
+  }, [news]);
 
   if (!news) {
     return (
@@ -136,7 +154,7 @@ export default function NewsDetail() {
               width={20}
               height={20}
             />
-            {news.comments} Comments
+            {commentCount} Comments
           </button>
         </div>
 
@@ -170,7 +188,7 @@ export default function NewsDetail() {
             className="w-full px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
             onClick={goToCommentsPage}
           >
-            View More Comments ({news.comments})
+            View More Comments ({commentCount})
           </button>
         </div>
       </div>
