@@ -1,10 +1,10 @@
-// It is a Card that Show on Home Page
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function NewsCard({ news: propNews, id }) {
   const [news, setNews] = useState(propNews || null);
+  const [commentCount, setCommentCount] = useState(0);
 
   useEffect(() => {
     if (propNews || !id) return;
@@ -23,20 +23,35 @@ export default function NewsCard({ news: propNews, id }) {
     fetchNews();
   }, [propNews, id]);
 
-  if (!news) {
-  return (
-    <div className="flex items-center justify-center h-screen"
-    style={{ fontFamily: "Outfit, sans-serif" }}>
-      <p className="text-gray-500 text-lg animate-pulse">Loading...</p>
-    </div>
-  );
-}
+  // Fetch comment count from Google Sheet
+  useEffect(() => {
+    if (!news) return;
 
+    async function fetchCommentCount() {
+      try {
+        const res = await fetch(`/api/commentCount?newsId=${news.id}`);
+        const data = await res.json();
+        setCommentCount(data.count || 0);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    fetchCommentCount();
+  }, [news]);
+
+  if (!news) {
+    return (
+      <div className="flex items-center justify-center h-screen" style={{ fontFamily: "Outfit, sans-serif" }}>
+        <p className="text-gray-500 text-lg animate-pulse">Loading...</p>
+      </div>
+    );
+  }
 
   return (
     <div
       className="bg-white border rounded-lg shadow p-4 flex flex-col justify-between border-gray-200 
-     hover:shadow-lg hover:-translate-y-1 transform transition duration-300 group"
+      hover:shadow-lg hover:-translate-y-1 transform transition duration-300 group"
       style={{ fontFamily: "Outfit, sans-serif" }}
     >
       <div>
@@ -62,41 +77,26 @@ export default function NewsCard({ news: propNews, id }) {
         </p>
       </div>
 
-      <div className=" items-center text-sm mt-4">
+      <div className="items-center text-sm mt-4">
         <div className="flex space-x-4">
           <span className="flex items-center gap-1 text-green-600">
-            <Image
-              src="/icon/Card/Like.png"
-              alt="Like Icon"
-              width={20}
-              height={20}
-            />
+            <Image src="/icon/Card/Like.png" alt="Like Icon" width={20} height={20} />
             {news.upVotes}
           </span>
 
           <span className="flex items-center gap-1 text-red-600">
-            <Image
-              src="/icon/Card/dislike.png"
-              alt="disLike Icon"
-              width={20}
-              height={20}
-            />
+            <Image src="/icon/Card/Dislike.png" alt="disLike Icon" width={20} height={20} />
             {news.downVotes}
           </span>
 
           <span className="flex items-center gap-1 text-gray-600">
-            <Image
-              src="/icon/Card/comment.png"
-              alt="comment Icon"
-              width={20}
-              height={20}
-            />
-            {news.comments}
+            <Image src="/icon/Card/Comment.png" alt="comment Icon" width={20} height={20} />
+            {commentCount}
           </span>
         </div>
         <Link href={`/news/${news.id}`}>
           <button
-            className=" mt-4 bg-gray-50 border-gray-200 border rounded px-3 py-1 w-full h-10 
+            className="mt-4 bg-gray-50 border-gray-200 border rounded px-3 py-1 w-full h-10 
             hover:bg-[#3c83f6] hover:text-white transition-colors duration-300"
           >
             View Details

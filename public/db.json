@@ -1,0 +1,635 @@
+{
+  "news": [
+    {
+      "id": 1,
+      "title": "Government Launches New Education Reform Policy",
+      "stats": "Verified",
+      "description": "The Ministry of Education has announced a new reform aimed at improving digital literacy in schools nationwide.",
+      "author": "Jane Smith",
+      "image": "/news/images/1.png",
+      "date": "2025-08-10",
+      "upVotes": 124,
+      "downVotes": 45,
+      "comments": 0,
+      "fullDescription": "The Ministry of Education announced a nationwide reform to improve digital literacy in schools. The plan provides devices, integrates coding and AI lessons, and trains teachers to effectively use technology. Its aim is to equip students with essential digital skills, foster critical thinking, and prepare them for future careers. Experts note it could reduce the digital divide between urban and rural areas, encourage innovative learning, and ensure students are ready for a rapidly evolving technological world."
+    },
+    {
+      "id": 2,
+      "title": "Celebrity Spotted Buying a Flying Car",
+      "stats": "Fake News",
+      "description": "Rumors spread online claimed a famous actor purchased the world's first flying car, but no evidence supports the story.",
+      "author": "John Doe",
+      "image": "/news/images/2.png",
+      "date": "2025-08-08",
+      "upVotes": 30,
+      "downVotes": 93,
+      "comments": 0,
+      "fullDescription": "Rumors circulating online claimed that a famous actor purchased the world’s first commercially available flying car. Social media posts and viral videos suggested sightings near luxury events, fueling excitement among fans. However, no credible evidence or official confirmations support this story. Experts point out that such vehicles are still largely experimental, requiring government clearance and extensive safety tests. The actor’s representatives denied any involvement, highlighting the rapid spread of misinformation online and the challenges of verifying sensational claims."
+    },
+    {
+      "id": 3,
+      "title": "Tech Company Testing AI-Powered Healthcare Assistant",
+      "stats": "Under Review",
+      "description": "A leading tech company is piloting an AI tool that helps doctors analyze patient data, but experts caution further testing is needed.",
+      "author": "Emily Johnson",
+      "image": "/news/images/3.png",
+      "date": "2023-07-28",
+      "upVotes": 50,
+      "downVotes": 50,
+      "comments": 0,
+      "fullDescription": "A leading technology company has begun piloting an AI-powered healthcare assistant designed to help medical professionals analyze patient data more efficiently. The tool can process large volumes of records, identify patterns, and suggest potential diagnoses. While early results show promise in reducing administrative burdens and improving decision-making, experts caution that extensive testing is required to ensure accuracy, reliability, and ethical compliance. Regulatory approval and collaboration with healthcare providers are ongoing to make sure the AI tool aligns with patient safety standards."
+    },
+    {
+      "id": 4,
+      "title": "Local Farmers Report Record Rice Harvest",
+      "stats": "Verified",
+      "description": "Farmers in the central region have reported their largest rice harvest in over a decade due to favorable weather conditions.",
+      "author": "Michael Green",
+      "image": "/news/images/4.png",
+      "date": "2023-07-26",
+      "upVotes": 83,
+      "downVotes": 20,
+      "comments": 0,
+      "fullDescription": "Farmers in the central region reported their largest rice harvest in over a decade due to favorable weather conditions and improved farming techniques. The increased yield has boosted local economies, providing more income for agricultural communities. Government support programs and modern machinery adoption contributed to efficiency. Analysts suggest that if these practices continue, the region could become a model for sustainable agriculture. Experts stress the importance of maintaining soil health and water management to ensure future productivity remains high."
+    },
+    {
+      "id": 5,
+      "title": "Scientists Discover Cure for Aging",
+      "stats": "Fake News",
+      "description": "Social media posts claim that scientists have found a cure for aging, but experts confirm this is misinformation.",
+      "author": "Sarah Lee",
+      "image": "/news/images/5.png",
+      "date": "2023-07-18",
+      "upVotes": 17,
+      "downVotes": 71,
+      "comments": 0,
+      "fullDescription": "Social media posts claiming that scientists have discovered a cure for aging spread rapidly, sparking global interest. However, experts have confirmed this information is false, highlighting the dangers of misinformation in online communities. Research in anti-aging remains ongoing, but no breakthroughs can halt the natural aging process. Authorities advise the public to critically evaluate online claims and consult reputable scientific sources. The viral story serves as a reminder of how sensational news can mislead readers and create unrealistic expectations about scientific advancements."
+    },
+    {
+      "id": 6,
+      "title": "City Plans to Expand Green Public Spaces",
+      "stats": "Verified",
+      "description": "The city council announced a $50 million initiative to expand parks and green areas across urban neighborhoods.",
+      "author": "David Kim",
+      "image": "/news/images/6.png",
+      "date": "2023-07-14",
+      "upVotes": 90,
+      "downVotes": 40,
+      "comments": 0,
+      "fullDescription": "The city council has announced a $50 million initiative to expand parks and green areas across urban neighborhoods. The plan aims to improve air quality, provide recreational spaces, and promote mental well-being for residents. Urban planners are working on sustainable landscaping and community involvement projects. Citizens are encouraged to participate in the planning process through public consultations. The initiative reflects growing awareness of environmental preservation and the importance of accessible green spaces in enhancing urban living quality."
+    },
+    {
+      "id": 7,
+      "title": "Aliens Found Living Under the Ocean",
+      "stats": "Fake News",
+      "description": "Conspiracy blogs spread false claims that extraterrestrial beings were discovered under the Pacific Ocean.",
+      "author": "Anonymous",
+      "image": "/news/images/7.png",
+      "date": "2023-07-13",
+      "upVotes": 10,
+      "downVotes": 60,
+      "comments": 0,
+      "fullDescription": "Conspiracy blogs and viral posts claimed extraterrestrial beings were discovered under the Pacific Ocean. These reports lacked credible scientific evidence and were debunked by marine researchers. Experts explained that deep-sea exploration remains limited, and no unknown intelligent life forms have been found. Despite this, social media amplification created widespread public curiosity. This story highlights the role of sensational content in spreading misinformation, emphasizing the need for critical thinking and verification from authoritative sources before believing extraordinary claims."
+    },
+    {
+      "id": 8,
+      "title": "University Develops New Solar Panel Technology",
+      "stats": "Verified",
+      "description": "Engineers at a local university have developed solar panels that are 30% more efficient than current models.",
+      "author": "Laura Chen",
+      "image": "/news/images/8.png",
+      "date": "2023-07-05",
+      "upVotes": 110,
+      "downVotes": 30,
+      "comments": 0,
+      "fullDescription": "Engineers at a local university have developed solar panels that are 30% more efficient than current models. The breakthrough technology uses innovative materials and design improvements to capture and convert sunlight more effectively. Researchers aim to make solar energy more accessible and cost-effective, potentially reducing reliance on fossil fuels. The project has received funding from environmental agencies and private investors. If widely adopted, the technology could contribute significantly to sustainable energy solutions and global efforts to combat climate change."
+    },
+    {
+      "id": 9,
+      "title": "Famous Singer Announces Surprise Album",
+      "stats": "Verified",
+      "description": "Global pop star revealed a new surprise album dropping at midnight, sending fans into excitement.",
+      "author": "Rachel Adams",
+      "image": "/news/images/9.png",
+      "date": "2023-06-30",
+      "upVotes": 75,
+      "downVotes": 25,
+      "comments": 0,
+      "fullDescription": "A global pop star surprised fans by announcing a new album release at midnight, sending social media into a frenzy. The unexpected drop generated excitement among followers, leading to record-breaking streaming numbers within hours. Music critics anticipate that the album will top charts internationally, and the artist’s marketing strategy has been praised for its creativity. Fans eagerly discuss favorite tracks online, while industry insiders analyze the potential commercial impact. The album release demonstrates the power of surprise marketing and fan engagement in the modern music industry."
+    },
+    {
+      "id": 10,
+      "title": "Drinking Coffee Prevents All Diseases",
+      "stats": "Fake News",
+      "description": "A viral post falsely claims coffee can cure or prevent every disease, which experts say is untrue.",
+      "author": "Mark Wilson",
+      "image": "/news/images/10.png",
+      "date": "2023-06-27",
+      "upVotes": 20,
+      "downVotes": 80,
+      "comments": 0,
+      "fullDescription": "A viral post claimed that coffee consumption can prevent every disease, which experts confirm is untrue. While coffee has health benefits, including antioxidants and improved alertness, it cannot cure or prevent all illnesses. Medical professionals warn against believing exaggerated health claims and emphasize balanced diets, exercise, and regular check-ups. The misinformation spread rapidly on social media, demonstrating how easy it is for false claims to gain traction. Critical evaluation of health information is essential to avoid harmful misconceptions."
+    },
+    {
+      "id": 11,
+      "title": "National Museum Unveils Ancient Artifacts",
+      "stats": "Verified",
+      "description": "The National Museum has opened a new exhibition showcasing artifacts over 3,000 years old.",
+      "author": "Olivia Brown",
+      "image": "/news/images/11.png",
+      "date": "2023-06-22",
+      "upVotes": 95,
+      "downVotes": 20,
+      "comments": 0,
+      "fullDescription": "The National Museum has opened a new exhibition featuring artifacts over 3,000 years old, showcasing the rich cultural heritage of the region. Visitors can explore historical objects, manuscripts, and ancient tools that highlight human creativity and technological advancement. The exhibition aims to educate the public about historical developments and inspire interest in archaeology. Curators have collaborated with historians and conservators to ensure accurate representation. Interactive displays and guided tours enhance visitor engagement, making history accessible and compelling for diverse audiences."
+    },
+    {
+      "id": 12,
+      "title": "Man Claims to Time Travel to 2090",
+      "stats": "Fake News",
+      "description": "Videos circulating online show a man who claims to have traveled to the year 2090, but experts dismiss it as fabricated.",
+      "author": "Chris Martin",
+      "image": "/news/images/12.png",
+      "date": "2023-06-17",
+      "upVotes": 5,
+      "downVotes": 50,
+      "comments": 0,
+      "fullDescription": "Videos circulating online show a man claiming to have traveled to the year 2090. Experts and scientists dismissed these claims as fabricated and explained that no credible evidence supports time travel. Despite this, the content went viral, attracting curiosity and skepticism. The story highlights how extraordinary claims can spread quickly online, often fueled by sensationalism. Authorities urge the public to verify information through reliable sources before sharing. The case illustrates the challenges of combating misinformation in the digital age."
+    },
+    {
+      "id": 13,
+      "title": "Hospital Implements AI for Faster Diagnoses",
+      "stats": "Under Review",
+      "description": "A local hospital is testing artificial intelligence to help doctors speed up patient diagnosis.",
+      "author": "Sophia Davis",
+      "image": "/news/images/13.png",
+      "date": "2023-06-11",
+      "upVotes": 60,
+      "downVotes": 60,
+      "comments": 0,
+      "fullDescription": "A local hospital is piloting artificial intelligence systems to help doctors diagnose patients more quickly. The AI tool analyzes medical imaging and patient data, suggesting potential conditions for consideration. While promising, the system undergoes careful review to ensure accuracy, ethical compliance, and patient privacy protection. Researchers are collaborating with clinicians to integrate AI responsibly into healthcare workflows. Early trials indicate potential to reduce diagnostic errors and improve patient outcomes, though widespread implementation will require thorough evaluation and regulatory approval."
+    },
+    {
+      "id": 14,
+      "title": "World’s Largest Wind Farm Opens Offshore",
+      "stats": "Verified",
+      "description": "The world's largest offshore wind farm has begun operations, capable of powering 3 million homes.",
+      "author": "Daniel Scott",
+      "image": "/news/images/14.png",
+      "date": "2023-06-08",
+      "upVotes": 85,
+      "downVotes": 30,
+      "comments": 0,
+      "fullDescription": "The world's largest offshore wind farm has begun operations, generating enough electricity to power 3 million homes. The facility features advanced turbines and sustainable infrastructure, contributing to global renewable energy goals. Environmental assessments ensured minimal disruption to marine life. The project highlights international cooperation in clean energy initiatives and represents a significant step toward reducing carbon emissions. Local communities benefit from job creation and technological development. This milestone underscores the importance of renewable energy in combating climate change and meeting growing energy demands."
+    },
+    {
+      "id": 15,
+      "title": "Chocolate Shortage Predicted Worldwide",
+      "stats": "Under Review",
+      "description": "Experts warn that climate change could lead to a shortage in global chocolate supply in coming years.",
+      "author": "Hannah White",
+      "image": "/news/images/15.png",
+      "date": "2023-06-05",
+      "upVotes": 45,
+      "downVotes": 45,
+      "comments": 0,
+      "fullDescription": "Experts warn that climate change and extreme weather in key cocoa-producing regions may lead to a global chocolate shortage. Droughts, flooding, and inconsistent crop yields threaten supply chains, which could result in higher prices and reduced availability. Manufacturers are exploring sustainable sourcing, alternative farming practices, and fair-trade initiatives to maintain production levels. Consumers are advised to anticipate potential shortages. Policymakers and agricultural organizations are collaborating to support farmers, stabilize the market, and ensure long-term resilience against environmental challenges."
+    },
+    {
+      "id": 16,
+      "title": "City Introduces Free Public Wi-Fi",
+      "stats": "Verified",
+      "description": "Residents can now enjoy free Wi-Fi access across downtown and several major parks.",
+      "author": "Kevin Brown",
+      "image": "/news/images/16.png",
+      "date": "2023-06-01",
+      "upVotes": 70,
+      "downVotes": 25,
+      "comments": 0,
+      "fullDescription": "The city has launched a free public Wi-Fi initiative covering downtown areas and major parks. This program aims to bridge the digital divide, providing reliable internet access for work, education, and social connectivity. Partnerships with tech providers ensure secure, high-speed connections. Public spaces and community centers are equipped with infrastructure for widespread use. Authorities encourage responsible usage, and the project is expected to enhance accessibility, digital literacy, and convenience for all residents while fostering greater community engagement and inclusion."
+    },
+    {
+      "id": 17,
+      "title": "Mystery Creature Found in the Desert",
+      "stats": "Fake News",
+      "description": "Photos of a so-called 'mystery desert creature' circulating online are confirmed to be digitally edited.",
+      "author": "Nancy Clark",
+      "image": "/news/images/17.png",
+      "date": "2023-05-28",
+      "upVotes": 12,
+      "downVotes": 55,
+      "comments": 0,
+      "fullDescription": "Online photos claimed discovery of a mysterious desert creature, gaining widespread attention. Experts analyzed the images and confirmed they were digitally manipulated, debunking the hoax. Despite being false, the story sparked curiosity and discussion online, illustrating the power of viral misinformation. Educational campaigns emphasize critical thinking and media literacy, urging the public to verify unusual claims through credible sources. The case serves as a lesson on the importance of questioning sensational content and the role of science in confirming or refuting extraordinary assertions."
+    },
+    {
+      "id": 18,
+      "title": "New High-Speed Rail Line Approved",
+      "stats": "Verified",
+      "description": "The government has approved construction of a new high-speed rail line connecting major cities.",
+      "author": "Peter Hall",
+      "image": "/news/images/18.png",
+      "date": "2023-05-20",
+      "upVotes": 88,
+      "downVotes": 40,
+      "comments": 0,
+      "fullDescription": "The government approved construction of a new high-speed rail line connecting major cities, promising faster travel and improved transportation efficiency. The project includes modern stations, environmentally sustainable construction practices, and integration with existing transit networks. Anticipated benefits include job creation, increased tourism, and boosted regional trade. Urban planners, engineers, and environmental experts are collaborating to ensure safe and sustainable implementation. Citizens look forward to improved connectivity, with future expansions planned to enhance mobility and support smart transportation systems in the growing urban landscape."
+    },
+    {
+      "id": 19,
+      "title": "Drinking Lemon Water Extends Lifespan to 150",
+      "stats": "Fake News",
+      "description": "An online article falsely claims drinking lemon water daily can extend human lifespan to 150 years.",
+      "author": "Fake News Watch",
+      "image": "/news/images/19.png",
+      "date": "2023-05-14",
+      "upVotes": 8,
+      "downVotes": 60,
+      "comments": 0,
+      "fullDescription": "An online article claimed that drinking lemon water daily could extend human lifespan to 150 years. Health experts confirmed this is false, emphasizing that longevity depends on genetics, lifestyle, and medical care. While lemon water provides vitamin C and hydration, it cannot prevent aging or significantly prolong life. The viral claim demonstrates how misinformation spreads rapidly online. Professionals advise the public to consult credible sources for health advice, highlighting the need for critical evaluation of sensational wellness claims and discouraging reliance on exaggerated or unverified health tips."
+    },
+    {
+      "id": 20,
+      "title": "New Smartphone Breaks Sales Record",
+      "stats": "Verified",
+      "description": "The latest flagship smartphone has broken all previous records with over 10 million units sold in one week.",
+      "author": "James Allen",
+      "image": "/news/images/20.png",
+      "date": "2023-05-10",
+      "upVotes": 100,
+      "downVotes": 20,
+      "comments": 0,
+      "fullDescription": "The latest flagship smartphone broke previous sales records, selling over 10 million units in its first week. Innovative features, sleek design, and a global marketing campaign contributed to massive consumer demand. Analysts note that pre-orders and early release events drove rapid adoption, setting new benchmarks in the tech industry. Enthusiasts share reviews online, and competitors observe market trends closely. The success highlights brand loyalty and strategic product launches, with expectations for future innovations in the device series. Accessories and complementary products have also seen a surge in demand."
+    },
+    {
+      "id": 21,
+      "title": "City Zoo Welcomes Rare Panda Cubs",
+      "stats": "Verified",
+      "description": "The city zoo celebrated the birth of two rare panda cubs, drawing attention from around the world.",
+      "author": "Linda Perez",
+      "image": "/news/images/21.png",
+      "date": "2023-05-08",
+      "upVotes": 90,
+      "downVotes": 35,
+      "comments": 0,
+      "fullDescription": "The city zoo celebrated the birth of two rare panda cubs, attracting widespread public attention and boosting awareness for conservation efforts. Zookeepers closely monitor the cubs’ health and development, while educational programs highlight the importance of protecting endangered species. Visitors are encouraged to engage with exhibits, learn about wildlife preservation, and participate in volunteer opportunities. Media coverage and social campaigns help inspire community involvement, donations, and global support for conservation projects. The event strengthens local commitment to biodiversity and environmental stewardship."
+    },
+    {
+      "id": 22,
+      "title": "New Study Claims Humans Only Use 10% of Brain",
+      "stats": "Under Review",
+      "description": "Scientists debunk viral claims that humans use only 10% of their brain, calling it a long-standing myth.",
+      "author": "Alex Turner",
+      "image": "/news/images/22.png",
+      "date": "2023-04-22",
+      "upVotes": 50,
+      "downVotes": 50,
+      "comments": 0,
+      "fullDescription": "A viral claim that humans use only 10% of their brain has been thoroughly debunked by neuroscientists. Brain imaging studies show widespread activity across various regions, even during simple tasks. Despite its persistence in pop culture and online platforms, the myth misleads the public about cognitive function. Educators and scientists emphasize critical thinking and proper evaluation of information. Awareness campaigns aim to correct misunderstandings, promote scientific literacy, and encourage interest in neuroscience. The case illustrates the importance of relying on credible research to counter misinformation."
+    },
+    {
+      "id": 23,
+      "title": "Breakthrough in Cancer Research Announced",
+      "stats": "Fake News",
+      "description": "Researchers announce a major breakthrough in cancer treatment, improving survival rates significantly.",
+      "author": "Grace Moore",
+      "image": "/news/images/23.png",
+      "date": "2023-04-01",
+      "upVotes": 25,
+      "downVotes": 80,
+      "comments": 0,
+      "fullDescription": "Researchers have announced a groundbreaking advancement in cancer treatment, introducing innovative therapies that significantly improve patient survival rates. Clinical trials show enhanced effectiveness with reduced side effects, offering hope for previously untreatable cases. The breakthrough combines molecular targeting, immunotherapy, and precision medicine approaches, backed by international research collaboration. Ongoing studies aim to expand treatment applicability and ensure regulatory approval. The discovery has garnered global attention, encouraging public support, funding, and awareness of the importance of continued investment in medical research and cancer prevention initiatives."
+    },
+    {
+      "id": 24,
+      "title": "Company to Launch Space Tourism by 2030",
+      "stats": "Verified",
+      "description": "A private space company has announced plans to make commercial space tourism available by 2030.",
+      "author": "Brian Kelly",
+      "image": "/news/images/24.png",
+      "date": "2023-03-23",
+      "upVotes": 120,
+      "downVotes": 40,
+      "comments": 0,
+      "fullDescription": "A private aerospace company announced plans to offer commercial space tourism experiences by 2030, targeting civilian passengers and space enthusiasts. The initiative includes suborbital flights, orbital missions, and immersive training for participants. Engineering teams prioritize safety, reliability, and environmental sustainability, while partnerships with aerospace agencies and research institutions support technological development. The announcement has generated excitement, highlighting potential economic growth in the space industry and inspiring STEM education. Public interest and pre-bookings indicate strong demand for future extraterrestrial adventures and private space exploration opportunities."
+    }
+  ],
+  "comments": [
+    [
+      {
+        "id": 1,
+        "name": "Michael Lee",
+        "status": "up",
+        "comment": "This news is credible because the Ministry of Education’s official website confirmed the digital literacy initiative, and several reputable newspapers reported the same plan.",
+        "imageUrl": "https://img.freepik.com/free-photo/news-background-with-newspaper-and-glasses_23-2148532192.jpg?w=740"
+      },
+      {
+        "id": 1,
+        "name": "Anna Johnson",
+        "status": "up",
+        "comment": "I believe this is true as local school boards have shared announcements about integrating AI and coding lessons, which matches the story.",
+        "imageUrl": ""
+      },
+      {
+        "id": 1,
+        "name": "David Kim",
+        "status": "up",
+        "comment": "Verified by multiple education blogs and social media accounts of teachers discussing the new reform, so this news seems accurate.",
+        "imageUrl": ""
+      },
+      {
+        "id": 2,
+        "name": "Emily White",
+        "status": "down",
+        "comment": "There’s no official confirmation from the actor or the car company, and all sources are just social media rumors.",
+        "imageUrl": ""
+      },
+      {
+        "id": 2,
+        "name": "Robert Chen",
+        "status": "down",
+        "comment": "Flying cars are still in testing phases and require government permits. This story is clearly exaggerated.",
+        "imageUrl": ""
+      },
+      {
+        "id": 2,
+        "name": "Sofia Martinez",
+        "status": "down",
+        "comment": "Multiple fact-check sites have marked this as false, and the actor’s representatives denied the claim.",
+        "imageUrl": ""
+      },
+      {
+        "id": 4,
+        "name": "Sarah Johnson",
+        "status": "up",
+        "comment": "This is wonderful news for the farmers and the community! Sustainable practices and government support truly make a difference. I hope this success inspires other regions to follow similar methods.",
+        "imageUrl": "https://img.freepik.com/free-photo/green-rice-field-sunset_1150-11114.jpg"
+      },
+      {
+        "id": 4,
+        "name": "David Lee",
+        "status": "up",
+        "comment": "A record harvest like this shows how innovation and tradition can work together. Congratulations to all the hardworking farmers!",
+        "imageUrl": "https://img.freepik.com/free-photo/farmer-harvesting-rice-field_1150-10728.jpg"
+      },
+      {
+        "id": 4,
+        "name": "James Miller",
+        "status": "up",
+        "comment": "It’s inspiring to see how good weather, technology, and proper management can lead to such positive outcomes. Hopefully, soil and water care will remain a top priority.",
+        "imageUrl": "https://img.freepik.com/free-photo/closeup-shot-green-rice-plants-field_181624-25037.jpg"
+      },
+      {
+        "id": 5,
+        "name": "Mark Thompson",
+        "status": "up",
+        "comment": "People should always double-check the facts before believing such extraordinary claims. Aging is a natural process and there’s no miracle cure yet.",
+        "imageUrl": ""
+      },
+      {
+        "id": 5,
+        "name": "Olivia Harris",
+        "status": "up",
+        "comment": "This is a clear example of why we must be careful with online news. Fake science stories can create false hope and confusion.",
+        "imageUrl": ""
+      },
+      {
+        "id": 5,
+        "name": "Daniel Scott",
+        "status": "down",
+        "comment": "Research on aging is fascinating, but no one has discovered a cure. We need patience and real science, not viral hoaxes.",
+        "imageUrl": "https://img.freepik.com/free-photo/dna-double-helix-structure_1150-18012.jpg"
+      },
+      {
+        "id": 6,
+        "name": "Jessica Brown",
+        "status": "up",
+        "comment": "This is fantastic! Green spaces make cities healthier and more livable. I can’t wait to see the new parks open.",
+        "imageUrl": ""
+      },
+      {
+        "id": 6,
+        "name": "Robert Wilson",
+        "status": "up",
+        "comment": "A great investment for the community. Parks provide not only clean air but also safe places for families to gather.",
+        "imageUrl": ""
+      },
+      {
+        "id": 6,
+        "name": "Hannah Moore",
+        "status": "up",
+        "comment": "More green spaces mean better mental health for residents. Nature is essential for city life balance.",
+        "imageUrl": ""
+      },
+      {
+        "id": 7,
+        "name": "Anthony Reed",
+        "status": "down",
+        "comment": "It’s amazing how quickly conspiracy theories spread online. No evidence, just imagination. People should trust marine science, not rumors.",
+        "imageUrl": "https://img.freepik.com/free-photo/ocean-waves-blue-sea_53876-142087.jpg"
+      },
+      {
+        "id": 7,
+        "name": "Laura Bennett",
+        "status": "down",
+        "comment": "The ocean already has so much undiscovered beauty—coral reefs, unique fish, deep-sea creatures. That’s more exciting than fake alien news.",
+        "imageUrl": ""
+      },
+      {
+        "id": 7,
+        "name": "Christopher Young",
+        "status": "down",
+        "comment": "Stories like this remind us why critical thinking is so important. Let’s admire real science instead of falling for clickbait.",
+        "imageUrl": ""
+      },
+      {
+        "id": 8,
+        "name": "Linda Parker",
+        "status": "up",
+        "comment": "This breakthrough is great news for clean energy. Affordable solar panels will make renewable power more accessible to everyone.",
+        "imageUrl": ""
+      },
+      {
+        "id": 8,
+        "name": "Thomas Rivera",
+        "status": "up",
+        "comment": "Universities continue to push innovation forward. This new solar tech could reduce costs and help fight climate change.",
+        "imageUrl": "https://img.freepik.com/free-photo/solar-panel-close-up_1150-11225.jpg"
+      },
+      {
+        "id": 9,
+        "name": "Chloe Anderson",
+        "status": "up",
+        "comment": "I’m so excited! A surprise album release is always the best gift for fans.",
+        "imageUrl": "https://img.freepik.com/free-photo/music-stage-concert_1150-12415.jpg"
+      },
+      {
+        "id": 9,
+        "name": "Jason Cooper",
+        "status": "up",
+        "comment": "Can’t wait to listen! This is the kind of news that makes everyone’s day brighter.",
+        "imageUrl": ""
+      },
+      {
+        "id": 10,
+        "name": "Amanda Wright",
+        "status": "down",
+        "comment": "Coffee has benefits, but preventing all diseases is impossible. This headline is misleading.",
+        "imageUrl": ""
+      },
+      {
+        "id": 10,
+        "name": "George Bell",
+        "status": "down",
+        "comment": "Be careful with such exaggerated claims. Always check medical research before believing health news.",
+        "imageUrl": ""
+      },
+      {
+        "id": 11,
+        "name": "Natalie Brooks",
+        "status": "up",
+        "comment": "This is an amazing contribution to history and culture. I’d love to visit the museum and see the artifacts myself.",
+        "imageUrl": ""
+      },
+      {
+        "id": 11,
+        "name": "Henry Adams",
+        "status": "up",
+        "comment": "Preserving history is so important. Kudos to the museum for sharing these treasures with the public.",
+        "imageUrl": ""
+      },
+      {
+        "id": 12,
+        "name": "Stephanie Morgan",
+        "status": "down",
+        "comment": "Time travel stories are entertaining but not real. Science hasn’t proven anything close to this.",
+        "imageUrl": "https://img.freepik.com/free-photo/abstract-clock_1150-12987.jpg"
+      },
+      {
+        "id": 12,
+        "name": "Brian Foster",
+        "status": "down",
+        "comment": "Extraordinary claims like this need evidence, not just a man’s story. Clearly fake.",
+        "imageUrl": "https://img.freepik.com/free-photo/futuristic-city_1150-12777.jpg"
+      },
+      {
+        "id": 14,
+        "name": "Olivia Turner",
+        "status": "up",
+        "comment": "This is a big step toward renewable energy. Offshore wind power is the future!"
+      },
+      {
+        "id": 14,
+        "name": "Daniel Hughes",
+        "status": "up",
+        "comment": "Clean energy on this scale is inspiring. Great news for the planet and future generations."
+      },
+      {
+        "id": 16,
+        "name": "Karen Mitchell",
+        "status": "up",
+        "comment": "Free Wi-Fi will make life easier for students and workers. Great step toward digital inclusion!",
+        "imageUrl": "https://img.freepik.com/free-photo/free-wifi-symbol_1150-11125.jpg"
+      },
+      {
+        "id": 16,
+        "name": "Andrew Collins",
+        "status": "up",
+        "comment": "Excellent initiative! This will help connect more people and boost opportunities for learning and business."
+      },
+      {
+        "id": 17,
+        "name": "Melissa Carter",
+        "status": "down",
+        "comment": "Without photos or scientific evidence, this is just another internet myth. Deserts have animals, but no “mystery creatures.”"
+      },
+      {
+        "id": 17,
+        "name": "Joshua Allen",
+        "status": "down",
+        "comment": "Sensational stories like this spread too easily. Let’s rely on biology, not rumors."
+      },
+      {
+        "id": 18,
+        "name": "Victoria Hall",
+        "status": "up",
+        "comment": "Fantastic news! High-speed rail will reduce travel time and cut down emissions. 🚄"
+      },
+      {
+        "id": 18,
+        "name": "Benjamin Price",
+        "status": "up",
+        "comment": "This project will boost the economy and improve transportation efficiency. Can’t wait to ride it!",
+        "imageUrl": "https://img.freepik.com/free-photo/modern-train-station_1150-11398.jpg"
+      },
+      {
+        "id": 19,
+        "name": "Rachel Foster",
+        "status": "down",
+        "comment": "Lemon water is healthy, but it doesn’t make people live to 150. Please don’t fall for such fake claims. 🍋"
+      },
+      {
+        "id": 19,
+        "name": "Patrick Young",
+        "status": "down",
+        "comment": "This is misleading health news. Only balanced lifestyle and medicine can improve longevity, not magic drinks"
+      },
+      {
+        "id": 20,
+        "name": "Jennifer Scott",
+        "status": "up",
+        "comment": "Impressive! It shows how much people trust this brand’s innovation and quality. 📱"
+      },
+      {
+        "id": 20,
+        "name": "Matthew Rogers",
+        "status": "up",
+        "comment": "Breaking sales records means the product really resonates with users. Congrats to the tech team!"
+      },
+      {
+        "id": 21,
+        "name": "Sophia Gray",
+        "status": "up",
+        "comment": "So adorable! The arrival of panda cubs is great for conservation and education.",
+        "imageUrl": "https://img.freepik.com/free-photo/baby-panda_1150-11987.jpg"
+      },
+      {
+        "id": 21,
+        "name": "William Baker",
+        "status": "up",
+        "comment": "Rare pandas bring joy to the community and raise awareness about protecting endangered species."
+      },
+      {
+        "id": 23,
+        "name": "Emily Ross",
+        "status": "down",
+        "comment": "Cancer research is ongoing, but no sudden miracle “cure” exists. This story is misleading and dangerous."
+      },
+      {
+        "id": 23,
+        "name": "Charles Green",
+        "status": "down",
+        "comment": "False claims about cancer cures give false hope. Please trust only peer-reviewed medical research."
+      },
+      {
+        "id": 24,
+        "name": "Megan Phillips",
+        "status": "up",
+        "comment": "Exciting! Space tourism will inspire a new generation of explorers."
+      },
+      {
+        "id": 24,
+        "name": "Jonathan Edwards",
+        "status": "up",
+        "comment": "It’s amazing how fast technology is advancing. 2030 doesn’t seem so far away anymore!"
+      }
+    ],
+    {
+      "id": 1,
+      "name": "Fnxr",
+      "type": "up",
+      "comment": "REAL",
+      "imageUrl": "",
+      "createdAt": "2025-08-24T08:56:42.656Z"
+    }
+  ]
+}
