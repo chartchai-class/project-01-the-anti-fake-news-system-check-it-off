@@ -28,7 +28,7 @@ export default async function handler(req, res) {
     });
 
     const commentRows = readComments.data.values || [];
-    const count = commentRows.filter(
+    const commentCount = commentRows.filter(
       (row) => row[0] === newsId.toString()
     ).length;
 
@@ -46,7 +46,7 @@ export default async function handler(req, res) {
       downVotes = parseInt(newsRows[rowIndex][8] || "0", 10);
     }
 
-    res.status(200).json({ count });
+    res.status(200).json({ commentCount, upVotes, downVotes });
   } catch (err) {
     console.error("Comment count error:", err);
     res.status(500).json({ error: "Failed to get comment count" });

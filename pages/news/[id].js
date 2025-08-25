@@ -80,20 +80,23 @@ export default function NewsDetail() {
   }, [news]);
 
   useEffect(() => {
-    async function fetchCounts() {
-      try {
-        const res = await fetch(`/api/commentCount?newsId=${newsId}`);
-        const data = await res.json();
-        setCommentCount(data.commentCount);
-        setUpVotes(data.upVotes);
-        setDownVotes(data.downVotes);
-      } catch (err) {
-        console.error("Failed to fetch counts:", err);
-      }
-    }
+  if (!news) return;
 
-    fetchCounts();
-  }, [news]);
+  async function fetchCounts() {
+    try {
+      const res = await fetch(`/api/commentCount?newsId=${news.id}`);
+      const data = await res.json();
+      setCommentCount(data.commentCount || 0);
+      setUpVotes(data.upVotes || 0);
+      setDownVotes(data.downVotes || 0);
+    } catch (err) {
+      console.error("Failed to fetch counts:", err);
+    }
+  }
+
+  fetchCounts();
+}, [news]);
+
 
   if (!news) {
     return (
