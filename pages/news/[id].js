@@ -8,6 +8,8 @@ export default function NewsDetail() {
   const { id } = router.query;
   const [news, setNews] = useState(null);
   const [commentCount, setCommentCount] = useState(0);
+  const [upVotes, setUpVotes] = useState(0);
+  const [downVotes, setDownVotes] = useState(0);
 
   const goToVotePage = () => {
     router.push(`/vote?id=${news.id}`);
@@ -39,12 +41,11 @@ export default function NewsDetail() {
             (c) => c.newsId === item.id || c.newsId === String(item.id)
           ).length;
 
-          const imageSrc =
-            item.image?.startsWith("/")
-              ? item.image
-              : item.image
-              ? `/${item.image}`
-              : null;
+          const imageSrc = item.image?.startsWith("/")
+            ? item.image
+            : item.image
+            ? `/${item.image}`
+            : null;
 
           setNews({
             ...item,
@@ -61,7 +62,7 @@ export default function NewsDetail() {
     fetchNews();
   }, [id]);
 
-    // Fetch comment count from Google Sheet
+  // Fetch comment count from Google Sheet
   useEffect(() => {
     if (!news) return;
 
@@ -78,6 +79,22 @@ export default function NewsDetail() {
     fetchCommentCount();
   }, [news]);
 
+  useEffect(() => {
+    async function fetchCounts() {
+      try {
+        const res = await fetch(`/api/commentCount?newsId=${newsId}`);
+        const data = await res.json();
+        setCommentCount(data.commentCount);
+        setUpVotes(data.upVotes);
+        setDownVotes(data.downVotes);
+      } catch (err) {
+        console.error("Failed to fetch counts:", err);
+      }
+    }
+
+    fetchCounts();
+  }, [news]);
+
   if (!news) {
     return (
       <div className="flex items-center justify-center h-screen">
@@ -87,8 +104,9 @@ export default function NewsDetail() {
   }
 
   return (
-    <div className="p-8 max-w-4xl mx-auto"
-     style={{fontFamily: "Outfit, sans-serif" }}
+    <div
+      className="p-8 max-w-4xl mx-auto"
+      style={{ fontFamily: "Outfit, sans-serif" }}
     >
       <button
         onClick={() => router.back()}
@@ -133,8 +151,13 @@ export default function NewsDetail() {
 
         <div className="flex flex-wrap items-center gap-4 mt-2">
           <button className="flex items-center gap-1 px-3 py-1 bg-green-50 rounded">
-            <Image src="/icon/Card/Like.png" alt="Like" width={20} height={20} />
-            {news.upVotes}
+            <Image
+              src="/icon/Card/Like.png"
+              alt="Like"
+              width={20}
+              height={20}
+            />
+            {upVotes}
           </button>
 
           <button className="flex items-center gap-1 px-3 py-1 bg-red-50 rounded">
@@ -144,7 +167,7 @@ export default function NewsDetail() {
               width={20}
               height={20}
             />
-            {news.downVotes}
+            {downVotes}
           </button>
 
           <button className="flex items-center gap-1 px-3 py-1 bg-gray-50 hover:bg-gray-100 rounded">

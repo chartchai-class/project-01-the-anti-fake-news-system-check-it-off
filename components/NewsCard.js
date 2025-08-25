@@ -5,6 +5,8 @@ import Link from "next/link";
 export default function NewsCard({ news: propNews, id }) {
   const [news, setNews] = useState(propNews || null);
   const [commentCount, setCommentCount] = useState(0);
+  const [upVotes, setUpVotes] = useState(0);
+  const [downVotes, setDownVotes] = useState(0);
 
   useEffect(() => {
     if (propNews || !id) return;
@@ -40,9 +42,28 @@ export default function NewsCard({ news: propNews, id }) {
     fetchCommentCount();
   }, [news]);
 
+    useEffect(() => {
+    async function fetchCounts() {
+      try {
+        const res = await fetch(`/api/commentCount?newsId=${newsId}`);
+        const data = await res.json();
+        setCommentCount(data.commentCount);
+        setUpVotes(data.upVotes);
+        setDownVotes(data.downVotes);
+      } catch (err) {
+        console.error("Failed to fetch counts:", err);
+      }
+    }
+
+    fetchCounts();
+  }, [news]);
+
   if (!news) {
     return (
-      <div className="flex items-center justify-center h-screen" style={{ fontFamily: "Outfit, sans-serif" }}>
+      <div
+        className="flex items-center justify-center h-screen"
+        style={{ fontFamily: "Outfit, sans-serif" }}
+      >
         <p className="text-gray-500 text-lg animate-pulse">Loading...</p>
       </div>
     );
@@ -80,17 +101,32 @@ export default function NewsCard({ news: propNews, id }) {
       <div className="items-center text-sm mt-4">
         <div className="flex space-x-4">
           <span className="flex items-center gap-1 text-green-600">
-            <Image src="/icon/Card/Like.png" alt="Like Icon" width={20} height={20} />
-            {news.upVotes}
+            <Image
+              src="/icon/Card/Like.png"
+              alt="Like Icon"
+              width={20}
+              height={20}
+            />
+            {upVotes}
           </span>
 
           <span className="flex items-center gap-1 text-red-600">
-            <Image src="/icon/Card/Dislike.png" alt="disLike Icon" width={20} height={20} />
-            {news.downVotes}
+            <Image
+              src="/icon/Card/Dislike.png"
+              alt="disLike Icon"
+              width={20}
+              height={20}
+            />
+            {downVotes}
           </span>
 
           <span className="flex items-center gap-1 text-gray-600">
-            <Image src="/icon/Card/Comment.png" alt="comment Icon" width={20} height={20} />
+            <Image
+              src="/icon/Card/Comment.png"
+              alt="comment Icon"
+              width={20}
+              height={20}
+            />
             {commentCount}
           </span>
         </div>
