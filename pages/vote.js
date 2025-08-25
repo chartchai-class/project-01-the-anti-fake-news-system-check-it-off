@@ -74,23 +74,22 @@ export default function VotePage() {
     }
   };
 
-    useEffect(() => {
-  if (!news) return;
+  useEffect(() => {
+    if (!news) return;
 
-  async function fetchCounts() {
-    try {
-      const res = await fetch(`/api/commentCount?newsId=${news.id}`);
-      const data = await res.json();
-      setCommentCount(data.commentCount || 0);
-      setUpVotes(data.upVotes || 0);
-      setDownVotes(data.downVotes || 0);
-    } catch (err) {
-      console.error("Failed to fetch counts:", err);
+    async function fetchCounts() {
+      try {
+        const res = await fetch(`/api/commentCount?newsId=${news.id}`);
+        const data = await res.json();
+        setUpVotes(data.upVotes || 0);
+        setDownVotes(data.downVotes || 0);
+      } catch (err) {
+        console.error("Failed to fetch counts:", err);
+      }
     }
-  }
 
-  fetchCounts();
-}, [news]);
+    fetchCounts();
+  }, [news]);
 
   if (!news) {
     return (
@@ -117,7 +116,9 @@ export default function VotePage() {
             height={20}
             className="mr-2"
           />
-          {from === "comments" ? "Back to News Comments" : "Back to News Details"}
+          {from === "comments"
+            ? "Back to News Comments"
+            : "Back to News Details"}
         </button>
       )}
 
