@@ -6,6 +6,8 @@ export default function VotePage() {
   const router = useRouter();
   const { id, from } = router.query || {};
   const [news, setNews] = useState(null);
+  const [upVotes, setUpVotes] = useState(0);
+  const [downVotes, setDownVotes] = useState(0);
   const [form, setForm] = useState({
     name: "",
     vote: "",
@@ -72,6 +74,24 @@ export default function VotePage() {
     }
   };
 
+    useEffect(() => {
+  if (!news) return;
+
+  async function fetchCounts() {
+    try {
+      const res = await fetch(`/api/commentCount?newsId=${news.id}`);
+      const data = await res.json();
+      setCommentCount(data.commentCount || 0);
+      setUpVotes(data.upVotes || 0);
+      setDownVotes(data.downVotes || 0);
+    } catch (err) {
+      console.error("Failed to fetch counts:", err);
+    }
+  }
+
+  fetchCounts();
+}, [news]);
+
   if (!news) {
     return (
       <div className="flex items-center justify-center h-screen">
@@ -131,7 +151,7 @@ export default function VotePage() {
                   width={20}
                   height={20}
                 />
-                {news.upVotes} Real
+                {upVotes} Real
               </span>
               <span className="flex items-center gap-1 text-red-600">
                 <Image
@@ -140,7 +160,7 @@ export default function VotePage() {
                   width={20}
                   height={20}
                 />
-                {news.downVotes} Fake
+                {downVotes} Fake
               </span>
             </div>
           </div>
