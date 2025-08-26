@@ -1,7 +1,7 @@
 ## Term Project
 The Term Project SE331 Component-Based Software Development <br>
 **project-01-the-anti-fake-news-system-check-it-off** <br>
-**Deployment :** [View on Vercel](https://project-01-the-anti-fake-news-system-check-it-pnhyptmjn.vercel.app/)
+**Deployment :** [View on Vercel](https://project-01-the-anti-fake-news-syste-eight.vercel.app/)
 
 <br>
 
