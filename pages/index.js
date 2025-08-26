@@ -1,6 +1,7 @@
 // Home Page
 import { useEffect, useState } from "react";
 import Header from "../components/Header";
+import Footer from "@/components/Footer";
 import NewsCard from "../components/NewsCard";
 
 export default function Home() {
@@ -125,6 +126,8 @@ export default function Home() {
           </button>
         </div>
       )}
+
+      <Footer />
     </div>
   );
 }
